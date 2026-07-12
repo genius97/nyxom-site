@@ -29,17 +29,25 @@
 - **رقم الواتساب**: مذكور في `assets/js/main.js` (المتغير `WHATSAPP`) وفي روابط `wa.me` داخل الصفحات.
 - **صورة المؤسس**: حالياً رسم تجريدي (كوكبة نجوم). لإضافة صورة حقيقية: ضع `founder.jpg` في `assets/img/` واستبدل وسم الـ SVG داخل `index.html` و`about.html` (يوجد تعليق يوضح المكان) بـ `<img src="assets/img/founder.jpg" alt="صالح بن ناصر المحروقي">`.
 
-## النشر على GitHub Pages
+## النشر عبر Coolify على خادم Hetzner
 
-1. من صفحة المستودع: **Settings ← Pages**.
-2. تحت **Build and deployment** اختر: Source = **Deploy from a branch**، ثم Branch = **main** والمجلد **/(root)** واحفظ.
-3. خلال دقائق سيصبح الموقع متاحاً على: `https://genius97.github.io/nyxom-site/`
+الموقع يُنشر كحاوية Nginx ثابتة — يوجد `Dockerfile` و`nginx.conf` جاهزان في جذر المستودع.
 
-### ربط نطاق nyxom.com لاحقاً
+1. في Coolify: **Project ← + New ← Resource ← Public Repository**، والصق رابط المستودع واختر الفرع.
+2. **Build Pack: Dockerfile** (يُكتشف تلقائياً)، و**Port: 80**، دون أمر بناء.
+3. في **Configuration ← General** حدّد النطاق `https://nyxom.ai`، ووجّه سجل **A** في DNS إلى IP خادم Hetzner (وسجل `AAAA` إن كان لديك IPv6).
+4. اضغط **Deploy** — يُصدر Coolify شهادة HTTPS تلقائياً عبر Let's Encrypt، ويتحول المورد إلى أخضر عند جاهزيته (عبر الـ healthcheck).
 
-1. في **Settings ← Pages ← Custom domain** اكتب `nyxom.com` (سيُنشئ ملف CNAME تلقائياً).
-2. عند مسجّل النطاق، أضف سجلات DNS حسب توثيق GitHub Pages (سجلات A إلى IPات GitHub، أو CNAME للـ www).
-3. بعد الربط، حدّث الروابط المطلقة (canonical / og:image / sitemap.xml / robots.txt) من `https://genius97.github.io/nyxom-site/` إلى `https://nyxom.com/` — البحث والاستبدال في الملفات يكفي، فكل روابط التنقل الداخلية نسبية أصلاً.
+> تلميح: فعّل **Auto Deploy** (مع GitHub App أو webhook) لإعادة النشر تلقائياً عند كل دفع.
+
+- نطاق الموقع: **nyxom.ai** — والروابط المطلقة (canonical / og:image / sitemap.xml / robots.txt) مضبوطة عليه بالفعل.
+- بريد التواصل: **admin@nyxom.com** (مختلف عن نطاق الموقع عمداً).
+- عند تغيير أي نطاق مستقبلاً: بحث واستبدال بسيط في الملفات يكفي، فكل روابط التنقل الداخلية نسبية أصلاً.
+
+### بديل: النشر على GitHub Pages
+
+إن أردت لاحقاً استضافة مجانية: **Settings ← Pages ← Deploy from a branch** واختر الفرع والمجلد **/(root)**.
+(في هذه الحالة أعد الروابط المطلقة إلى `https://<username>.github.io/nyxom-site/` أو اربط النطاق المخصص.)
 
 ## ملاحظات تقنية
 

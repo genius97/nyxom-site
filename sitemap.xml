@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://genius97.github.io/nyxom-site/</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://genius97.github.io/nyxom-site/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://genius97.github.io/nyxom-site/en/"/>
+    <loc>https://nyxom.ai/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nyxom.ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nyxom.ai/en/"/>
   </url>
   <url>
-    <loc>https://genius97.github.io/nyxom-site/services.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://genius97.github.io/nyxom-site/services.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://genius97.github.io/nyxom-site/en/services.html"/>
+    <loc>https://nyxom.ai/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nyxom.ai/services.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nyxom.ai/en/services.html"/>
   </url>
   <url>
-    <loc>https://genius97.github.io/nyxom-site/projects.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://genius97.github.io/nyxom-site/projects.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://genius97.github.io/nyxom-site/en/projects.html"/>
+    <loc>https://nyxom.ai/projects.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nyxom.ai/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nyxom.ai/en/projects.html"/>
   </url>
   <url>
-    <loc>https://genius97.github.io/nyxom-site/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://genius97.github.io/nyxom-site/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://genius97.github.io/nyxom-site/en/about.html"/>
+    <loc>https://nyxom.ai/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nyxom.ai/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nyxom.ai/en/about.html"/>
   </url>
   <url>
-    <loc>https://genius97.github.io/nyxom-site/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://genius97.github.io/nyxom-site/contact.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://genius97.github.io/nyxom-site/en/contact.html"/>
+    <loc>https://nyxom.ai/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nyxom.ai/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nyxom.ai/en/contact.html"/>
   </url>
-  <url><loc>https://genius97.github.io/nyxom-site/en/</loc></url>
-  <url><loc>https://genius97.github.io/nyxom-site/en/services.html</loc></url>
-  <url><loc>https://genius97.github.io/nyxom-site/en/projects.html</loc></url>
-  <url><loc>https://genius97.github.io/nyxom-site/en/about.html</loc></url>
-  <url><loc>https://genius97.github.io/nyxom-site/en/contact.html</loc></url>
+  <url><loc>https://nyxom.ai/en/</loc></url>
+  <url><loc>https://nyxom.ai/en/services.html</loc></url>
+  <url><loc>https://nyxom.ai/en/projects.html</loc></url>
+  <url><loc>https://nyxom.ai/en/about.html</loc></url>
+  <url><loc>https://nyxom.ai/en/contact.html</loc></url>
 </urlset>
