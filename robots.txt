@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://genius97.github.io/nyxom-site/sitemap.xml

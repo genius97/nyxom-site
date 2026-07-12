@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>٤٠٤ — نجمة خارج الخريطة | نكسوم</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#070D1E">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100svh;
+      display: grid; place-items: center;
+      background: radial-gradient(80% 70% at 50% 110%, rgba(39,87,201,.3), transparent 65%), #070D1E;
+      color: #BCC8E8;
+      font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+      text-align: center; padding: 2rem;
+      overflow: hidden;
+    }
+    .wrap { position: relative; z-index: 1; }
+    h1 { color: #EEF3FF; font-size: clamp(1.6rem, 4.5vw, 2.6rem); margin: 0 0 .4em; }
+    .num {
+      font-size: clamp(5rem, 18vw, 10rem);
+      font-weight: 700; line-height: 1;
+      background: linear-gradient(120deg, #3D7BFF, #5BD9FF);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: .2em;
+    }
+    p { margin: 0 0 2rem; line-height: 1.9; }
+    .en { font-size: .9rem; opacity: .75; margin-top: .4rem; direction: ltr; }
+    a.btn {
+      display: inline-block; padding: .85rem 2rem; border-radius: 999px;
+      background: linear-gradient(120deg, #3D7BFF, #5BD9FF);
+      color: #051024; font-weight: 700; text-decoration: none;
+      box-shadow: 0 10px 40px -12px rgba(61,123,255,.5);
+    }
+    .star { position: fixed; border-radius: 50%; background: #9DB9FF; opacity: .5; animation: tw 3s ease-in-out infinite; }
+    @keyframes tw { 50% { opacity: .15; } }
+    @media (prefers-reduced-motion: reduce) { .star { animation: none; } }
+  </style>
+</head>
+<body>
+  <span class="star" style="width:2px;height:2px;top:18%;left:22%"></span>
+  <span class="star" style="width:3px;height:3px;top:12%;left:74%;animation-delay:.6s"></span>
+  <span class="star" style="width:2px;height:2px;top:64%;left:12%;animation-delay:1.2s"></span>
+  <span class="star" style="width:2px;height:2px;top:76%;left:82%;animation-delay:.3s"></span>
+  <span class="star" style="width:3px;height:3px;top:38%;left:90%;animation-delay:.9s"></span>
+  <div class="wrap">
+    <div class="num">٤٠٤</div>
+    <h1>هذه النجمة خارج خريطتنا</h1>
+    <p>الصفحة التي تبحث عنها غير موجودة أو انتقلت إلى مدارٍ آخر.<br>
+    <span class="en">This star is off our map — the page you're looking for doesn't exist.</span></p>
+    <a class="btn" id="home-link" href="/">العودة إلى الرئيسية · Home</a>
+  </div>
+  <script>
+    // works both on <user>.github.io/nyxom-site/ and on a custom domain
+    var seg = location.pathname.split('/')[1];
+    if (seg && seg === 'nyxom-site') document.getElementById('home-link').href = '/nyxom-site/';
+  </script>
+</body>
+</html>
