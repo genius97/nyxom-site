@@ -1,0 +1,7 @@
+# Coolify deployment marker (safe to commit — contains only identifiers, no secrets)
+COOLIFY_APP_UUID=amts95t1cpufrcfgacocafw1
+COOLIFY_APP_NAME=nyxom-web
+DEPLOY_BRANCH=main
+# Server: Hetzner VPS (coolify-production, 178.105.245.63) — Coolify v4.1.2
+# Project: nyxom (vz4hm8xzzfv81f8s57kqdacu)
+# Domain: https://nyxom.ai  | Build: Dockerfile (static Nginx, port 80)
