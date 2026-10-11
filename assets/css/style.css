@@ -708,13 +708,8 @@ html[dir="ltr"] .field select { background-position: calc(100% - 23px) 55%, calc
   justify-content: space-between; align-items: center;
   color: var(--t-2); font-size: .85rem;
 }
-.footer-legal {
-  text-align: center;
-  font-size: .82rem; line-height: 1.9;
-  color: var(--t-2); margin: 0 0 1.4rem;
-}
-.footer-legal strong { color: var(--t-1); font-weight: 700; }
-.footer-legal .cr { unicode-bidi: embed; }
+.footer-bottom .cr { unicode-bidi: isolate; }
+.footer-bottom .reg { color: var(--t-1); }
 .footer-brand { display: flex; align-items: center; gap: .7rem; color: var(--t-0); font-weight: 700; font-size: 1.15rem; margin-bottom: .9rem; }
 .footer-brand svg { width: 34px; height: 34px; }
 .made-in { display: inline-flex; align-items: center; gap: .45rem; }
