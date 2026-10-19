@@ -1,7 +1,7 @@
 /* NYXOM — shared behaviour: nav, reveal-on-scroll, WhatsApp contact form. */
 (function () {
   var LANG = document.documentElement.lang === 'en' ? 'en' : 'ar';
-  var WHATSAPP = '96896267250'; // +968 9626 7250
+  var WHATSAPP = '96891860264'; // +968 9186 0264
 
   /* ----- header state ----- */
   var header = document.querySelector('.site-header');
@@ -47,7 +47,7 @@
 
   /* ----- WhatsApp contact form -----
      The form never posts anywhere: it composes a structured message
-     and opens WhatsApp chat with +968 9626 7250 directly. */
+     and opens WhatsApp chat with +968 9186 0264 directly. */
   var form = document.getElementById('whatsapp-form');
   if (form) {
     form.addEventListener('submit', function (e) {
