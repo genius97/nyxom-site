@@ -548,6 +548,7 @@ html[dir="rtl"] .scroll-hint { translate: 50% 0; }
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center 20%;
 }
 .founder-quote {
   border-inline-start: 3px solid var(--gold);
@@ -763,6 +764,17 @@ html[dir="ltr"] .field select { background-position: calc(100% - 23px) 55%, calc
   .hero-actions .btn { width: 100%; }
   .pillars .grid { grid-template-columns: 1fr; }
   .cta-band { padding-inline: 1.4rem; }
+
+  /* Mobile: one consistent alignment — headings, intros, founder and footer centered */
+  .hero, .page-hero, .section-head, .founder > div:last-child,
+  .site-footer, .footer-grid > div { text-align: center; }
+  .hero .lead, .page-hero .lead, .section-head p, .footer-grid p { margin-inline: auto; }
+  .breadcrumbs, .hero-actions, .cred-chips, .footer-brand { justify-content: center; }
+  .founder-quote { border-inline-start: 0; padding-inline-start: 0; position: relative; padding-block-start: 1.1rem; }
+  .founder-quote::before { content: ""; position: absolute; top: 0; inset-inline-start: 50%; width: 56px; height: 3px;
+    background: var(--gold); border-radius: 2px; transform: translateX(50%); }
+  .founder-portrait { max-width: 320px; margin-inline: auto; width: 100%; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; gap: .6rem; }
 }
 
 /* ---------- Utility ---------- */
