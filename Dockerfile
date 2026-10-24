@@ -1,6 +1,9 @@
 # Nyxom static site — served by Nginx.
 # No build step: the site is plain HTML/CSS/JS with self-hosted fonts.
-FROM nginx:1.27-alpine
+FROM nginx:1.30-alpine
+
+# Security (Oct 2026 advisories): refresh OS packages + CA store
+RUN apk upgrade --no-cache
 
 # Replace the default server config with ours
 COPY nginx.conf /etc/nginx/conf.d/default.conf
