@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mujeeb · مجيب — Nyxom</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' aria-hidden='true'><defs><linearGradient id='lgF' x1='0' y1='64' x2='64' y2='0' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='%233D7BFF'/><stop offset='1' stop-color='%235BD9FF'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='%23070D1E'/><g transform='translate(9 9) scale(0.72)'><path d='M14 50V16l36 34V21' fill='none' stroke='url(%23lgF)' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/><circle cx='14' cy='50' r='4' fill='%233D7BFF'/><circle cx='14' cy='16' r='4' fill='%234FA6FF'/><circle cx='50' cy='50' r='4' fill='%235BD9FF'/><path d='M50 4c.9 5 3 7.1 8 8-5 .9-7.1 3-8 8-.9-5-3-7.1-8-8 5-.9 7.1-3 8-8Z' fill='%23EFC377'/></g></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#101828;--mute:#667085;--line:#eaecf0;--acc:#4f46e5;--acc2:#0ea5a4;--bad:#dc2626;--ok:#16a34a}
+*{box-sizing:border-box}body{margin:0;font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,#101828,#312e81);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:5}
+header b{font-size:18px}header small{opacity:.7}.hbtn{display:flex;gap:6px}
+.tabs{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:56px;z-index:4;justify-content:center}
+.tabs button{border:0;background:#eef1f7;color:var(--ink);padding:9px 14px;border-radius:10px;font:inherit;font-weight:500;white-space:nowrap;cursor:pointer}
+.tabs button.on{background:var(--acc);color:#fff}
+@media(max-width:700px){.tabs{position:fixed;top:auto;bottom:0;left:0;right:0;justify-content:space-around;border-top:1px solid var(--line);border-bottom:0;padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 16px rgba(16,24,40,.06)}.tabs button{flex:1;padding:10px 2px;font-size:13px}main{padding-bottom:calc(120px + env(safe-area-inset-bottom))!important}}
+.seg{display:flex;gap:6px;background:#eef0f5;padding:4px;border-radius:12px;margin-bottom:14px;overflow-x:auto}.seg button{flex:1;border:0;background:transparent;padding:9px 10px;border-radius:9px;font:inherit;cursor:pointer;white-space:nowrap}.seg button.on{background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.12);font-weight:700}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04)}
+.stat b{display:block;font-size:28px}.stat span{color:var(--mute);font-size:13px}.kpi b{font-size:30px}.funnel .card{text-align:center}
+h3{margin:18px 0 10px}.head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:18px 0 10px}.head h3{margin:0}
+.btn{border:0;background:var(--acc);color:#fff;padding:10px 16px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+.btn.sec{background:#eef1f7;color:var(--ink)}.btn.red{background:var(--bad)}.btn.green{background:var(--ok)}.btn.sm{padding:7px 12px;font-size:13px}
+.row.out .btn{flex:1;padding:12px 6px;min-width:0}.links{display:flex;gap:6px;flex-wrap:wrap}.links a,.links button{flex:1;min-width:70px;text-align:center;text-decoration:none;padding:8px 6px;border-radius:10px;font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}.links .wa{background:#e7f8ee;border-color:#c6efd6;color:#128c4a}
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:12px;overflow-x:auto;padding-bottom:8px}.col{background:#eef0f5;border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:10px;min-height:120px}.col h4{margin:2px 4px;display:flex;justify-content:space-between}.mini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:6px}.mini b{font-size:14px}
+input,select,textarea{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:10px;width:100%;background:#fff}
+label{font-size:13px;color:var(--mute);display:block;margin:10px 0 4px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.row>*{flex:1;min-width:140px}
+.lead{display:flex;flex-direction:column;gap:6px}.lead .top,.top{display:flex;justify-content:space-between;gap:8px;align-items:start}
+.badge{font-size:12px;padding:3px 9px;border-radius:999px;background:#eef1f7;white-space:nowrap}
+.t-high{background:#dcfce7;color:#166534}.t-medium{background:#fef3c7;color:#92400e}.t-low{background:#e0e7ff;color:#3730a3}.t-none{background:#fee2e2;color:#991b1b}
+.mute{color:var(--mute);font-size:13px}.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.filters>*{width:auto;flex:1;min-width:130px}
+a{color:var(--acc)}.hide{display:none!important}#login{max-width:380px;margin:60px auto}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px}.on-pill{background:#dcfce7;color:#166534}.off-pill{background:#fee2e2;color:#991b1b}
+.bar{height:10px;background:#eef1f7;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#0b1b33;color:#fff;padding:10px 16px;border-radius:10px;z-index:30}
+.act{background:#fff7e6;border:1px solid #fde68a;border-radius:10px;padding:8px 10px;font-weight:500}
+.msgs{max-height:260px;overflow:auto;background:#f8fafc;border-radius:10px;padding:8px;font-size:13px}.msgs p{margin:4px 0;padding:6px 8px;border-radius:8px;background:#fff}.msgs p.in{background:#e0f2fe}
+.chart{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;align-items:end;height:170px;margin-top:10px}.cb{display:flex;flex-direction:column;align-items:center;gap:2px;height:100%}.cv{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;gap:2px}.cv i{display:block;width:45%;background:var(--acc);border-radius:4px 4px 0 0;min-height:2px}.cv i.r{background:var(--acc2)}.cb small{font-size:11px;font-weight:700}.cb span{font-size:10px;color:var(--mute)}
+.jobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}.job{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:0;color:var(--ink);cursor:pointer}.job.sel{border-color:var(--acc);background:#f5f5ff}.job input{width:auto;margin-top:4px}.jb{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}.jt{display:flex;justify-content:space-between;gap:8px}.jn{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}
+.segs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:12px}.sc.empty{opacity:.55}.sc{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px;cursor:pointer;text-align:right;font:inherit;color:var(--ink);border-top:4px solid var(--c,#4f46e5)}.sc.on{outline:2px solid var(--acc)}.sc b{display:block;font-size:22px}.sc span{font-size:13px;color:var(--mute)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink)}.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}.chip i{font-style:normal;opacity:.7}
+.tag{font-size:11px;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:middle;margin:2px 0}
+.segbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-inline-start:5px solid var(--c,#4f46e5);border-radius:14px;padding:12px 14px;margin-bottom:12px}.segbar .kw{font-size:13px;color:var(--mute)}.lbar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.fun{display:flex;gap:4px;margin:10px 0}.fun div{flex:1;text-align:center;background:#f5f6fa;border-radius:10px;padding:8px 2px}.fun b{display:block;font-size:18px}.fun span{font-size:11px;color:var(--mute)}
+.sheet{position:fixed;inset:0;background:rgba(16,24,40,.45);z-index:20;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:20px 12px calc(20px + env(safe-area-inset-bottom))}.sheet>div{background:#fff;width:100%;max-width:680px;margin:0 auto;border-radius:20px;padding:20px 18px 22px;box-shadow:0 20px 50px rgba(16,24,40,.25)}
+textarea{field-sizing:content;min-height:88px;resize:vertical;line-height:1.7}
+.steps{display:flex;gap:6px;margin-bottom:12px}.steps i{flex:1;height:5px;border-radius:4px;background:#eef1f7}.steps i.on{background:var(--acc)}
+.stp{border:1px solid var(--line);border-radius:14px;padding:10px;margin-top:10px}
+.sum{background:#f5f6fa;border-radius:14px;padding:12px;margin-top:10px;line-height:1.9}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 6px;border-top:1px solid var(--line);text-align:right}th{color:var(--mute);font-weight:500;font-size:12px}
+.brand{display:flex;align-items:center;gap:10px}.brand .logo{width:34px;height:34px;flex:0 0 auto;border-radius:9px;box-shadow:0 0 0 1px rgba(255,255,255,.12)}.brand b{display:block;font-size:19px;letter-spacing:.3px;line-height:1.1}.brand small{display:block;font-size:11px;opacity:.75;letter-spacing:.2px}
+.brand.big{justify-content:center;margin:4px 0 14px;color:var(--ink)}.brand.big .logo{width:48px;height:48px}.brand.big b{font-size:24px}
+html[dir=ltr] body{font-family:'Inter','IBM Plex Sans Arabic',sans-serif}html[dir=ltr] td,html[dir=ltr] th,html[dir=ltr] .sc{text-align:left}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+const I18N={"من طلب الإيقاف أو قال غير مهتم لا تصله أي حملة. الإرسال يلتزم بالحد اليومي وأوقات الإرسال.": "Anyone who opted out or said not interested is never contacted. Sending respects the daily limit and sending hours.", "على واتساب: يرد على العملاء ويحجز المواعيد ويتابعهم على مدار الساعة باسم": "on WhatsApp: it answers customers, books appointments and follows up 24/7 on behalf of", "يسعدنا نرتب معك مكالمة قصيرة أشرح لك فيها الخدمة أكثر وكيف يمكن أن تخدم": "We'd be glad to arrange a short call to explain how the service can help", "مساعدنا الذكي طلب منا التواصل معك لأنك أبديت اهتمامك بخدمة الوكيل الذكي": "Our AI assistant asked us to reach out because you showed interest in the AI agent", "اتركها فارغة لتتبع الإعدادات العامة (زر «الإرسال» بالأعلى: الحد اليومي": "Leave empty to follow the global settings (the “Sending” button at the top: daily limit", "من سجل الجمع؟ العملاء الذين جُمعوا لن يُحذفوا.": "from the collection log? Collected leads will not be deleted.", "العملاء الظاهرون حسب البحث والفلاتر الحالية.": "The leads shown by the current search and filters.", "من فريق المبيعات في نكسوم للذكاء الاصطناعي.": "from the sales team at Nyxom AI.", "على رقم المبيعات. اكتب اسم القالب كما هو في": "on the sales number. Enter the template name exactly as in", "إيقاف الرسائل عن هذا العميل من كل الحملات؟": "Stop messages to this lead in all campaigns?", "كلمات البحث في خرائط جوجل (افصل بفاصلة)": "Google Maps search keywords (comma separated)", "أقصى عدد لكل عملية جارية أو بالانتظار (": "Max results per running or queued job (", "أقل مدة بين حملتين لنفس العميل (أيام)": "Min gap between two campaigns for one lead (days)", "يستخدمها الوكيل عند الرد على العملاء.": "The agent uses these when replying to customers.", "رقم واتسابك لاستقبال العملاء المهتمين": "Your WhatsApp number for interested leads", "لن يُحذفوا، فقط يُزالون من هذه الفئة.": "will not be deleted, only removed from this audience.", "لا يمكن حذف الفئة لأنها مستخدمة في:": "This audience can't be deleted because it is used in:", "يوجد بحث جارٍ الآن، انتظر حتى ينتهي": "A search is already running, please wait until it finishes", "تفعيل الحملة وبدء الإرسال للجمهور؟": "Activate the campaign and start sending to the audience?", "سبق دخولهم حملة أخرى، يبدؤون بعد": "were already in another campaign; they start", "الحد اليومي للرسائل (كل الحملات)": "Daily message limit (all campaigns)", "السلام عليكم ورحمة الله وبركاته": "Hello", "الكلمات المفتاحية (افصل بفاصلة)": "Keywords (comma separated)", "حسب نوع الرسالة (آخر ١٤ يوماً)": "By message type (last 14 days)", "نبذة يقدّم بها الوكيل الخدمة": "Pitch the agent uses to present the service", "تشغيل الإرسال الآلي للعملاء؟": "Turn on automatic sending to leads?", "رابط الصورة/الفيديو (إن وجد)": "Image/video URL (optional)", "لم يبدأ (الأداة كانت معلّقة)": "Did not start (scraper was stuck)", "شركة تطوير عقاري، مطور عقاري": "real estate developer, property developer", "اكتب اسم قالب واحد على الأقل": "Enter at least one template name", "مثال: وكيل السمسرة العقارية": "e.g. Real Estate Broker Agent", "الانتظار بين الرسائل (أيام)": "Wait between messages (days)", "الفئات (اختر واحدة أو أكثر)": "Audiences (choose one or more)", "الوكيل اللي يرد على العملاء": "Agent that answers the leads", "مثال: شركات التطوير العقاري": "e.g. Real estate developers", "أيام الإرسال (بدون اختيار": "Sending days (none selected", "التكلفة القصوى التقريبية:": "Estimated max cost:", "متى يناسبك الوقت للاتصال؟": "When is a good time to call?", "انتهت صلاحيته قبل أن يبدأ": "Expired before it started", "هذا الحساب ليس له صلاحية": "This account has no access", "لا يوجد عملاء في النتائج": "No leads in the results", "الميزات (كل ميزة في سطر)": "Features (one per line)", "جدول الإرسال لهذه الحملة": "Sending schedule for this campaign", "اختر فئة واحدة على الأقل": "Choose at least one audience", "بيانات الدخول غير صحيحة": "Incorrect login details", "احذفها من الحملة أولاً.": "Remove it from the campaign first.", "نقدّم خدمة الوكيل الذكي": "We offer an AI agent", "تكلفة الرسائل التقريبية": "Approx. messaging cost", "الحد اليومي لهذه الحملة": "Daily limit for this campaign", "جمع عملاء من خرائط جوجل": "Collect leads from Google Maps", "افتح المحادثة في واتساب": "Open chat in WhatsApp", "إجمالي الرسائل المرسلة": "Total messages sent", "كل رسالة قالب معتمد من": "Each message is a template approved by", "لا توجد إجراءات حالياً": "No actions right now", "العيادات: العرض الأخير": "Clinics: final offer", "تعديل الوكيل ومعلوماته": "Edit agent & knowledge", "اكتب العنوان والمحتوى": "Enter a title and content", "حسب الإعدادات العامة)": "= global settings)", "مثال: السماسرة - مسقط": "e.g. Brokers - Muscat", "١. الوكيل واسم الحملة": "1. Agent & campaign name", "الانتظار بعدها (أيام)": "Wait after (days)", "أقصى عدد رسائل للعميل": "Max messages per lead", "إضافة النتائج إلى فئة": "Add results to audience", "الرسائل آخر ١٤ يوماً": "Messages, last 14 days", "حذف الفاشلة والفارغة": "Delete failed & empty", "أيام الإرسال العامة": "global sending days", "نُقل إلى تم التواصل": "Moved to Contacted", "موقوف عن كل الحملات": "Stopped in all campaigns", "استغرق وقتاً طويلاً": "Took too long", "بحث بالاسم أو الرقم": "Search by name or number", "لا توجد معلومات بعد": "No knowledge yet", "المدن (بدون اختيار": "Cities (none selected", "للعقارات والسماسرة": "for real estate brokers", "تم تحديث العدد إلى": "Limit updated to", "أُرسلت خلال ٧ أيام": "Sent in 7 days", "رقم واتساب للتجربة": "Demo WhatsApp number", "رسالة الحملة بصورة": "Campaign message with image", "العقارات: المتابعة": "Real estate: follow-up", "رابط فيديو تعريفي": "Intro video URL", "العيادات: التعريف": "Clinics: intro", "العقارات: التعريف": "Real estate: intro", "البريد الإلكتروني": "Email", "التحكم في الإرسال": "Sending control", "يوم من آخر رسالة)": "days after their last message)", "الحد اليومي العام": "Global daily limit", "بانتظار أول رسالة": "Awaiting first message", "مهتمون بدون إجراء": "Interested, no action yet", "لا يوجد ما يُحذف": "Nothing to delete", "رسائل في التسلسل": "messages in sequence", "أُزيل من القائمة": "Removed from the list", "تم حفظ الإعدادات": "Settings saved", "ردود خلال ٧ أيام": "Replies in 7 days", "جارية وبالانتظار": "Running & queued", "للمقاهي والمطاعم": "for cafés and restaurants", "تم إيقاف الإرسال": "Sending paused", "تم تشغيل الإرسال": "Sending started", "في قاعدة العملاء": "Leads in database", "اكتب كلمات البحث": "Enter search keywords", "سجل عمليات الجمع": "Collection log", "بدون إيقاف الجمع": "without stopping collection", "تم تفعيل الحملة": "Campaign activated", "تم إيقاف الحملة": "Campaign paused", "تمت إضافة الفئة": "Audience added", "محافظة بالتتابع": "governorates in sequence", "اكتب اسم الحملة": "Enter a campaign name", "اكتب اسم الوكيل": "Enter an agent name", "خطأ في الرسائل:": "Message error:", "كل أيام الإرسال": "All sending days", "تعديل المعلومة": "Edit item", "يمكن مراسلتهم:": "Reachable:", "لشركات التنظيف": "for cleaning companies", "نتيجة التواصل:": "Outcome:", "جمع لهذه الفئة": "Collect for this audience", "اكتب اسم الفئة": "Enter an audience name", "الفئة الرئيسية": "Main audience", "معلومات الوكيل": "Agent knowledge", "تشغيل الإرسال": "Start sending", "صالح المحروقي": "Saleh Al Mahruqi", "لم يُراسل بعد": "not messaged yet", "لوحة المبيعات": "Sales Platform", "بانتظار الدور": "Queued", "حفظ الإعدادات": "Save settings", "لا يوجد عملاء": "No leads", "الإرسال متوقف": "Sending paused", "طلبوا الإيقاف": "Opted out", "يمكن مراسلتهم": "Reachable", "إيقاف الإرسال": "Pause sending", "بداية الإرسال": "Sending starts", "لا توجد رسائل": "No messages", "إيقاف الرسائل": "Stop messages", "كل الاهتمامات": "All interest levels", "بانتظار البدء": "Waiting to start", "نهاية الإرسال": "Sending ends", "لا توجد حملات": "No campaigns", "تغيير المرحلة": "Change stage", "تسجيل الدخول": "Sign in", "الوكيل مفعّل": "Agent active", "أيام الإرسال": "Sending days", "تعديل الوكيل": "Edit agent", "جنوب الباطنة": "South Batinah", "حفظ المعلومة": "Save item", "كل المحافظات": "All governorates", "وصلته الحملة": "Contacted", "اهتمام متوسط": "Medium interest", "عرض المزيد (": "Show more (", "جنوب الشرقية": "South Sharqiyah", "معلومة جديدة": "New knowledge item", "رسالة يومياً": "messages per day", "أُرسلت اليوم": "Sent today", "شمال الشرقية": "North Sharqiyah", "رسالة الحملة": "Campaign message", "تم حذف الفئة": "Audience deleted", "عميل إلى فئة": "leads to an audience", "كلمات البحث:": "Keywords:", "بدأ الجمع في": "Collection started in", "شمال الباطنة": "North Batinah", "الإرسال يعمل": "Sending on", "خطأ في الحفظ": "Save error", "بدون حد خاص": "No custom limit", "الحد العام)": "global limit)", "مستخدمة في:": "used in:", "محافظة مسقط": "Muscat Governorate", "جاري الحساب": "Calculating", "وصلتهم حملة": "Reached by a campaign", "رقم التجربة": "Demo number", "اهتمام ضعيف": "Low interest", "٤. المراجعة": "4. Review", "في الطابور:": "In queue:", "خط المبيعات": "Pipeline", "حذف الفئة «": "Delete audience “", "جاري الجمع:": "Collecting:", "اهتمام عالي": "High interest", "رسالة مرسلة": "messages sent", "كلمة المرور": "Password", "تحديث العدد": "Update limit", "تعديل الفئة": "Edit audience", "أرقام جديدة": "New numbers", "الحد اليومي": "Daily limit", "كل المراحل": "All stages", "ابدأ الجمع": "Start collecting", "اسم الوكيل": "Agent name", "كل الأحجام": "All sizes", "حذف المحدد": "Delete selected", "تم التفعيل": "Activated", "٢. الجمهور": "2. Audience", "تم التواصل": "Called", "آخر تواصل:": "Last contact:", "اسم الحملة": "Campaign name", "كل العملاء": "All leads", "في الطابور": "in queue", "تحديد الكل": "Select all", "حفظ وتفعيل": "Save & activate", "إلى الساعة": "To", "تم الإيقاف": "Stopped", "بدون جمهور": "No audience", "حملة جديدة": "New campaign", "عميل إلى «": "leads to “", "٣. الرسائل": "3. Messages", "جاري الجمع": "Collecting", "حفظ كمسودة": "Save as draft", "بدون نتائج": "No results", "اسم القالب": "Template name", "بالانتظار": "Queued", "كل المدن)": "= all cities)", "وكيل جديد": "New agent", "من الساعة": "From", "بدأ الجمع": "Collection started", "العملاء (": "Leads (", "اسم الفئة": "Audience name", "تمت إضافة": "Added", "كل الفئات": "All audiences", "فئة جديدة": "New audience", "وصف مختصر": "Short description", "تم الحفظ": "Saved", "كل المدن": "All cities", "للعيادات": "for clinics", "الداخلية": "Al Dakhiliyah", "للمتابعة": "To follow up", "الرئيسية": "Overview", "تم الحذف": "Deleted", "الأربعاء": "Wed", "المرحلة:": "Stage:", "المهتمون": "Interested", "المحادثة": "Chat", "الجمهور:": "Audience:", "غير مهتم": "Not interested", "الرسائل:": "Messages:", "الثلاثاء": "Tue", "أقصى عدد": "Max results", "الوكلاء": "Agents", "نقل إلى": "Move to", "الحملات": "Campaigns", "الخريطة": "Map", "العنوان": "Title", "الظاهرة": "Al Dhahirah", "الوكيل:": "Agent:", "البريمي": "Al Buraimi", "الجدول:": "Schedule:", "لا يوجد": "None", "المحتوى": "Content", "الرسائل": "Messages", "العملاء": "Leads", "الإرسال": "Sending", "العميل:": "Customer:", "عيادتكم": "your clinic", "المنطقة": "Region", "الاثنين": "Mon", "الجمهور": "Audience", "الرسالة": "Message", "للجمهور": "to the audience", "مفعّلة": "Active", "مكتملة": "Done", "شركتكم": "your company", "الفئات": "Audiences", "واتساب": "WhatsApp", "متوقفة": "Paused", "الشخص:": "Contact:", "موقوفة": "Off", "التالي": "Next", "وصلتهم": "Reached", "مهتمون": "Interested", "السابق": "Back", "الوسطى": "Al Wusta", "الحملة": "Campaign", "الحالي": "current", "الجمعة": "Fri", "تواصلت": "Contacted", "موبايل": "Mobile", "نشاطكم": "your business", "الخميس": "Thu", "معلومة": "items", "مستبعد": "Closed", "متبقي)": "left)", "مكتبكم": "your office", "الطلب:": "Request:", "رسالة": "messages", "تفاعل": "engaged", "الفئة": "Audience", "محلكم": "your café", "تفعيل": "Activate", "أُضيف": "added", "تعديل": "Edit", "رسائل": "messages", "مسندم": "Musandam", "الأحد": "Sun", "إيقاف": "Pause", "الجمع": "Collection", "اللغة": "Language", "إغلاق": "Close", "نكسوم": "Nyxom", "إضافة": "Add", "تحديث": "Refresh", "فيديو": "Video", "مرسلة": "Sent", "ردّوا": "Replied", "جارية": "Running", "اليوم": "Today", "السبت": "Sat", "عملية": "jobs", "عملاء": "Customers", "موقوف": "Stopped", "إلغاء": "Cancel", "النوع": "Type", "مفعّل": "Active", "متوسط": "Medium", "اللون": "Color", "اتصال": "Call", "اكتمل": "Done", "فاشلة": "Failed", "حملة": "campaigns", "عالي": "High", "مهتم": "Interested", "عميل": "leads", "جديد": "New", "يبدأ": "starting", "، من": ", from", "كبير": "Large", "ضعيف": "Low", "نشاط": "Businesses", "في «": "in “", "خروج": "Sign out", "وُجد": "Found", "خطأ:": "Error:", "برقم": "With phone", "صورة": "Image", "صغير": "Small", "منهم": "of them", "نشطة": "Active", "ظفار": "Dhofar", "دخول": "Sign in", "الكل": "All", "ردود": "Replies", "إلى": "to", "خطأ": "Error", "حفظ": "Save", "حذف": "Delete", "معك": "This is", "بحث": "searches", "فشل": "Failed", "حتى": "up to", "ر.ع": "OMR", "نص": "Text", "من": "of", "د": "min", "عيادات أسنان": "Dental clinics", "جلدية وتجميل وليزر": "Dermatology & laser", "مراكز ومجمعات طبية": "Medical centers", "عيادات عامة": "General clinics", "طب تقليدي وحجامة": "Traditional medicine", "عيادات عيون": "Eye clinics", "مراكز تجميل": "Beauty centers", "مقاهي ومطاعم": "Cafés & restaurants", "قهوة مختصة": "Specialty coffee", "شركات تنظيف": "Cleaning companies", "عيادات بيطرية": "Vet clinics", "عقارات وسماسرة": "Real estate & brokers", "أخرى": "Other", "وكيل حجز العيادات": "Clinic Booking Agent", "وكيل طلبات المقاهي والمطاعم": "Café & Restaurant Orders Agent", "وكيل السمسرة العقارية": "Real Estate Broker Agent", "العيادات والمراكز الطبية - كل التخصصات": "Clinics & Medical Centers - All Specialties", "المقاهي والمطاعم - مسقط والداخلية": "Cafés & Restaurants - Muscat & Dakhiliyah", "العقارات والسماسرة - تجربة": "Real Estate & Brokers - Pilot", "العيادات والمراكز الطبية": "Clinics & Medical Centers", "المقاهي والمطاعم": "Cafés & Restaurants", "العقارات والسماسرة": "Real Estate & Brokers", "مسقط": "Muscat", "السيب": "Seeb", "بوشر": "Bawshar", "مطرح": "Muttrah", "العامرات": "Al Amerat", "صحار": "Sohar", "صحم": "Saham", "السويق": "Al Suwaiq", "الخابورة": "Al Khaburah", "شناص": "Shinas", "الرستاق": "Rustaq", "بركاء": "Barka", "المصنعة": "Al Musanaah", "نخل": "Nakhal", "نزوى": "Nizwa", "بهلاء": "Bahla", "سمائل": "Samail", "إزكي": "Izki", "أدم": "Adam", "عبري": "Ibri", "إبراء": "Ibra", "المضيبي": "Al Mudhaibi", "بدية": "Bidiyah", "صور": "Sur", "هيما": "Haima", "صلالة": "Salalah", "خصب": "Khasab", "منح": "Manah", "مجيب": "Mujeeb", "منصة المبيعات · من نكسوم": "Sales Platform · Built by NYXOM", "من نكسوم": "Built by NYXOM", "في": "in", "فيديو تعريفي": "Intro video", "عيادة أسنان": "dental clinic", "طب أسنان": "dentistry", "عيادة جلدية": "dermatology clinic", "ليزر": "laser", "عيادة تجميل": "beauty clinic", "مكتب عقارات": "real estate office", "وسيط عقاري": "real estate agent", "سمسار عقار": "property broker", "تطوير عقاري": "real estate development", "مقهى": "café", "كافيه": "coffee shop", "مطعم": "restaurant", "فيديو تعريفي بوكيل العيادات + دعوة لتجربة الوكيل + زر إيقاف": "Clinic agent intro video + invite to try the agent + stop button", "آخر رسالة: أسبوع تجربة مجاني، بدون التزام، إيقاف في أي وقت — أزرار: التجربة المجانية / اتصلوا علي / غير مهتم": "Final message: free one-week trial, no commitment, cancel anytime — buttons: Free trial / Call me / Not interested", "صورة بأهم الميزات + سؤال قصير": "Key features image + short question", "تعريف بالمساعد الذكي للعقارات + تجربة مجانية": "Real estate AI assistant intro + free trial", "متابعة أخيرة بعرض التجربة": "Final follow-up with trial offer"};
+let LANG=(()=>{try{return localStorage.getItem('mj_lang')||'ar'}catch(e){return 'ar'}})();
+const I18N_RE=new RegExp('(?<![\\u0600-\\u06FF])('+Object.keys(I18N).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')(?![\\u0600-\\u06FF])','g');
+const AD='٠١٢٣٤٥٦٧٨٩';
+function tr(t){if(LANG!=='en'||!t||!/[\u0600-\u06FF«»]/.test(t))return t;return t.replace(I18N_RE,m=>I18N[m]).replace(/،/g,',').replace(/؟/g,'?').replace(/«/g,'“').replace(/»/g,'”').replace(/[٠-٩]/g,d=>AD.indexOf(d))}
+const SKIP='.nt,.msgs,script,style,textarea';
+function trNode(root){if(LANG!=='en')return;
+ if(root.nodeType===3){const p=root.parentElement;if(p&&!p.closest(SKIP)){const v=tr(root.nodeValue);if(v!==root.nodeValue)root.nodeValue=v}return}
+ if(root.nodeType!==1||root.closest(SKIP))return;
+ ['placeholder','title'].forEach(a=>{const v=root.getAttribute&&root.getAttribute(a);if(v){const n=tr(v);if(n!==v)root.setAttribute(a,n)}});
+ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let n;
+ while(n=w.nextNode()){if(n.nodeType===1){if(n.matches(SKIP)){continue}['placeholder','title'].forEach(a=>{const v=n.getAttribute(a);if(v){const x=tr(v);if(x!==v)n.setAttribute(a,x)}});if(n.tagName==='INPUT'&&n.type==='button'&&n.value)n.value=tr(n.value)}
+  else{const p=n.parentElement;if(p&&!p.closest(SKIP)){const v=tr(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v}}}}
+function setLang(l){try{localStorage.setItem('mj_lang',l)}catch(e){}location.reload()}
+if(LANG==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';
+ const _c=window.confirm.bind(window),_a=window.alert.bind(window);window.confirm=m=>_c(tr(String(m)));window.alert=m=>_a(tr(String(m)));
+ document.addEventListener('DOMContentLoaded',()=>{trNode(document.body);document.title='Mujeeb — Sales Platform by Nyxom';const b=document.getElementById('langBtn');if(b)b.textContent='عربي';
+  new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')trNode(m.target);else m.addedNodes.forEach(trNode)}}).observe(document.body,{childList:true,subtree:true,characterData:true})})}
+</script></head><body>
+<header><div class="brand"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgF" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3D7BFF"/><stop offset="1" stop-color="#5BD9FF"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#070D1E"/><g transform="translate(9 9) scale(0.72)"><path d="M14 50V16l36 34V21" fill="none" stroke="url(#lgF)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="50" r="4" fill="#3D7BFF"/><circle cx="14" cy="16" r="4" fill="#4FA6FF"/><circle cx="50" cy="50" r="4" fill="#5BD9FF"/><path d="M50 4c.9 5 3 7.1 8 8-5 .9-7.1 3-8 8-.9-5-3-7.1-8-8 5-.9 7.1-3 8-8Z" fill="#EFC377"/></g></svg><div><b>مجيب</b><small>منصة المبيعات · من نكسوم</small></div></div><div class="hbtn"><button class="btn sec sm" id="langBtn" onclick="setLang(LANG==='en'?'ar':'en')">EN</button><button class="btn sec sm hide" id="gear" onclick="openSet()">الإرسال</button><button class="btn sec sm hide" id="out" onclick="logout()">خروج</button></div></header>
+
+<section id="login" class="card hide">
+ <div class="brand big"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgF2" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3D7BFF"/><stop offset="1" stop-color="#5BD9FF"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#070D1E"/><g transform="translate(9 9) scale(0.72)"><path d="M14 50V16l36 34V21" fill="none" stroke="url(#lgF2)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="50" r="4" fill="#3D7BFF"/><circle cx="14" cy="16" r="4" fill="#4FA6FF"/><circle cx="50" cy="50" r="4" fill="#5BD9FF"/><path d="M50 4c.9 5 3 7.1 8 8-5 .9-7.1 3-8 8-.9-5-3-7.1-8-8 5-.9 7.1-3 8-8Z" fill="#EFC377"/></g></svg><div><b>مجيب</b><small>من نكسوم</small></div></div>
+ <h3 style="margin-top:0">تسجيل الدخول</h3>
+ <label>البريد الإلكتروني</label><input id="em" type="email" dir="ltr">
+ <label>كلمة المرور</label><input id="pw" type="password" dir="ltr">
+ <div style="height:12px"></div><button class="btn" style="width:100%" onclick="login()">دخول</button>
+ <p class="mute" id="lerr"></p>
+</section>
+
+<div id="app" class="hide">
+<nav class="tabs">
+ <button data-t="ov" class="on">الرئيسية</button><button data-t="act">المهتمون <span id="actn"></span></button><button data-t="aud">الجمهور</button><button data-t="camp">الحملات</button><button data-t="ag">الوكلاء</button>
+</nav>
+<main>
+ <section id="t-ov">
+  <div class="head" style="margin-top:0"><div id="sendState"></div><button class="btn sec sm" onclick="loadAll()">تحديث</button></div>
+  <div class="grid funnel" id="funnel"></div>
+  <h3>الحملات</h3><div class="card" style="padding:8px 12px;overflow-x:auto"><table id="ctab"></table></div>
+  <h3>الرسائل</h3>
+  <div class="grid">
+   <div class="card stat"><b id="s_all">0</b><span>إجمالي الرسائل المرسلة</span></div>
+   <div class="card stat"><b id="s_today">0</b><span>أُرسلت اليوم</span><div class="bar" style="margin-top:8px"><i id="s_bar" style="width:0"></i></div><span id="s_cap"></span></div>
+   <div class="card stat"><b id="s_7d">0</b><span>أُرسلت خلال ٧ أيام</span></div>
+   <div class="card stat"><b id="s_rep">0</b><span>ردود خلال ٧ أيام</span></div>
+   <div class="card stat"><b id="s_opt">0</b><span>طلبوا الإيقاف</span></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="top"><b>الرسائل آخر ١٤ يوماً</b><span class="mute"><span style="color:var(--acc)">■</span> مرسلة <span style="color:var(--acc2)">■</span> ردود</span></div><div id="chart" class="chart"></div></div>
+  <div class="card" style="margin-top:12px"><b>حسب نوع الرسالة (آخر ١٤ يوماً)</b><div id="bytpl"></div></div>
+ </section>
+
+ <section id="t-act" class="hide">
+  <div class="seg" id="av"><button data-v="todo" class="on">للمتابعة</button><button data-v="board">خط المبيعات</button></div>
+  <div id="v-todo"><div class="list" id="acts"></div><h3>مهتمون بدون إجراء</h3><div class="list" id="hot"></div></div>
+  <div id="v-board" class="hide"><div class="board" id="board"></div></div>
+ </section>
+
+ <section id="t-aud" class="hide">
+  <div class="head" style="margin-top:0"><h3>الفئات</h3><button class="btn sm" onclick="segSheet()">+ فئة جديدة</button></div>
+  <div class="segs" id="segs"></div><div id="segbar"></div>
+  <div class="seg" id="audv"><button data-v="leads" class="on">العملاء</button><button data-v="find">الجمع</button></div>
+  <div id="v-leads">
+   <div class="filters">
+    <input id="q" placeholder="بحث بالاسم أو الرقم" oninput="LIM=60;renderLeads()">
+    <select id="fSeg" onchange="pickSeg(+this.value||null)"><option value="">كل الفئات</option></select>
+    <select id="fStage" onchange="LIM=60;renderLeads()"><option value="">كل المراحل</option></select>
+    <select id="fTier" onchange="LIM=60;renderLeads()"><option value="">كل الاهتمامات</option><option value="high">عالي</option><option value="medium">متوسط</option><option value="low">ضعيف</option><option value="none">غير مهتم</option></select>
+    <select id="fCity" onchange="LIM=60;renderLeads()"><option value="">كل المدن</option></select>
+    <select id="fSize" onchange="LIM=60;renderLeads()"><option value="">كل الأحجام</option><option value="large">كبير</option><option value="medium">متوسط</option><option value="small">صغير</option></select>
+   </div>
+   <div class="lbar"><span class="mute" id="lcount"></span><button class="btn sec sm" onclick="bulkSeg()">إضافة النتائج إلى فئة…</button></div><div class="list" id="leads"></div><div id="more" style="text-align:center;margin-top:14px"></div>
+  </div>
+  <div id="v-find" class="hide">
+   <div class="card">
+    <h3 style="margin-top:0">جمع عملاء من خرائط جوجل</h3>
+    <div class="row">
+     <div><label>الفئة</label><select id="fs" onchange="fillKw()"></select></div>
+     <div><label>المنطقة</label><select id="fc"></select></div>
+     <div style="flex-basis:100%"><label>الكلمات المفتاحية (افصل بفاصلة)</label><textarea id="fq" rows="2"></textarea></div>
+     <div><label>أقصى عدد</label><input id="fmax" type="number" value="100" min="20" max="300" step="20"></div>
+    </div>
+    <div style="height:12px"></div><button class="btn" onclick="startImport()">ابدأ الجمع</button>
+   </div>
+   <div class="card hide" id="live" style="margin-top:12px"></div><div id="jctl"></div>
+   <div class="head"><h3>سجل عمليات الجمع</h3>
+    <div style="display:flex;gap:6px;flex-wrap:wrap"><select id="jf" onchange="renderJobs()" style="width:auto"><option value="">الكل</option><option value="done">مكتملة</option><option value="active">جارية وبالانتظار</option><option value="error">فاشلة</option><option value="empty">بدون نتائج</option></select>
+    <button class="btn sec sm" onclick="selAllJobs()">تحديد الكل</button><button class="btn red sm" onclick="delJobs()">حذف المحدد</button><button class="btn sec sm" onclick="delJunk()">حذف الفاشلة والفارغة</button></div></div>
+   <p class="mute" id="jsum"></p><div id="jobs" class="jobs"></div>
+  </div>
+ </section>
+
+ <section id="t-camp" class="hide">
+  <div class="head" style="margin-top:0"><h3>الحملات</h3><button class="btn sm" onclick="campSheet()">+ حملة جديدة</button></div>
+  <div class="list" id="camps"></div>
+ </section>
+
+ <section id="t-ag" class="hide">
+  <div class="head" style="margin-top:0"><h3>الوكلاء</h3><button class="btn sm" onclick="agSheet()">+ وكيل جديد</button></div>
+  <div class="list" id="agents"></div>
+ </section>
+
+ <section id="t-set" class="hide">
+  <div class="card">
+   <h3 style="margin-top:0">التحكم في الإرسال</h3>
+   <div id="pauseBox"></div>
+   <div class="row">
+    <div><label>الحد اليومي للرسائل (كل الحملات)</label><input id="cap" type="number" min="1" max="250"></div>
+    <div><label>بداية الإرسال</label><input id="st" type="time"></div>
+    <div><label>نهاية الإرسال</label><input id="en" type="time"></div>
+   </div>
+   <label>أيام الإرسال</label><div id="days" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+   <div class="row"><div><label>رقم واتسابك لاستقبال العملاء المهتمين</label><input id="ow" dir="ltr"></div></div>
+   <div style="height:12px"></div><button class="btn" onclick="saveSettings()">حفظ الإعدادات</button>
+  </div>
+ </section>
+</main></div>
+<div id="sheet" class="sheet hide" onclick="if(event.target===this)closeSheet()"><div id="sheetIn"></div></div>
+
+<script>
+const sb = supabase.createClient('https://upxqeontwoghuqfowmwf.supabase.co','sb_publishable_ovCJn_SNPSKOoy0qQv8rAQ_a79h1zw5');
+const GROUPS={new:'جديد',contacted:'وصلته الحملة',interested:'مهتم',called:'تم التواصل',customer:'عميل',closed:'مستبعد'};
+const grp=st=>({new:'new',contacted:'contacted',no_response:'contacted',replied:'interested',interested:'interested',qualified:'interested',handed_off:'called',customer:'customer',not_interested:'closed',invalid:'closed'})[st]||'contacted';
+const G2S={new:'new',contacted:'contacted',interested:'interested',called:'handed_off',customer:'customer',closed:'not_interested'};
+const TIERS={high:'اهتمام عالي',medium:'اهتمام متوسط',low:'اهتمام ضعيف',none:'غير مهتم'};
+const DAYS=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const SIZES={large:'كبير',medium:'متوسط',small:'صغير'};
+const GOVS=['محافظة مسقط','شمال الباطنة','جنوب الباطنة','الداخلية','الظاهرة','البريمي','شمال الشرقية','جنوب الشرقية','الوسطى','ظفار','مسندم'];
+let S={leads:[],settings:null,camps:[],kb:[],prods:[],segs:[],ls:[],cl:[],jobs:[],msgs:[]};
+let SEG=null; // selected audience in the audience tab (null = all)
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const toast=m=>{const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2500)};
+const fmtPhone=p=>p?('+'+p.slice(0,3)+' '+p.slice(3,7)+' '+p.slice(7)):'';
+const ago=d=>d?new Date(d).toLocaleString(LANG==='en'?'en-GB':'ar-OM',{dateStyle:'medium',timeStyle:'short'}):'—';
+const pname=id=>(S.prods.find(p=>p.id===id)||{}).name_ar||'';
+const cname=id=>(S.camps.find(c=>c.id===id)||{}).name||'';
+const segOf=id=>S.segs.find(s=>s.id===id)||{};
+const SECT={clinic:['للعيادات','عيادتكم'],dental:['للعيادات','عيادتكم'],dermatology:['للعيادات','عيادتكم'],cafe:['للمقاهي والمطاعم','محلكم'],real_estate:['للعقارات والسماسرة','مكتبكم'],cleaning:['لشركات التنظيف','شركتكم']};
+const hotLead=x=>x&&((x.next_action&&!x.action_done)||grp(x.stage)==='interested'||['high','medium'].includes(x.tier));
+function pitchMsg(x){const pr=S.prods.find(p=>p.id===x.product_id)||{};const [svc,biz]=SECT[pr.sector]||SECT[x.sector]||[pr.name_ar?'('+pr.name_ar+')':'',''];
+ const me=S.settings?.owner_name||'صالح المحروقي';const nm=(x.contact_name||'').trim();
+ return `السلام عليكم ورحمة الله وبركاته${nm?' '+nm:''}..\n\nمعك ${me} من فريق المبيعات في نكسوم للذكاء الاصطناعي.\n\n${hotLead(x)?`مساعدنا الذكي طلب منا التواصل معك لأنك أبديت اهتمامك بخدمة الوكيل الذكي ${svc}.`:`نقدّم خدمة الوكيل الذكي ${svc} على واتساب: يرد على العملاء ويحجز المواعيد ويتابعهم على مدار الساعة باسم ${biz||'نشاطكم'}.`}\n\nيسعدنا نرتب معك مكالمة قصيرة أشرح لك فيها الخدمة أكثر وكيف يمكن أن تخدم ${biz||'نشاطكم'}.\n\nمتى يناسبك الوقت للاتصال؟`}
+const WA=(p,x)=>{const t=x?'text='+encodeURIComponent(pitchMsg(x)):'';const w='https://wa.me/'+p+(t?'?'+t:'');return /Android/i.test(navigator.userAgent)?`intent://send?phone=${p}${t?'&'+t:''}#Intent;scheme=whatsapp;package=com.whatsapp.w4b;S.browser_fallback_url=${encodeURIComponent(w)};end`:w};
+
+function tab(t){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===t));document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hide',s.id!=='t-'+t));if(t==='aud'&&!$('v-find').classList.contains('hide'))setTimeout(liveTick,100)}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
+function openSet(){document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hide',s.id!=='t-set'))}
+function segBtns(id,map){document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));Object.entries(map).forEach(([k,el])=>$(el).classList.toggle('hide',k!==b.dataset.v));if(b.dataset.v==='find')setTimeout(liveTick,100)})}
+segBtns('av',{todo:'v-todo',board:'v-board'});segBtns('audv',{leads:'v-leads',find:'v-find'});
+['كل المحافظات',...GOVS].forEach(c=>$('fc').insertAdjacentHTML('beforeend',`<option>${c}</option>`));
+Object.entries(GROUPS).forEach(([k,v])=>$('fStage').insertAdjacentHTML('beforeend',`<option value="${k}">${v}</option>`));
+const sheet=h=>{const w=$('sheet').classList.contains('hide');$('sheetIn').innerHTML=h;$('sheet').classList.remove('hide');if(w)$('sheet').scrollTop=0;document.body.style.overflow='hidden'};const closeSheet=()=>{$('sheet').classList.add('hide');document.body.style.overflow=''};
+
+async function login(){const {error}=await sb.auth.signInWithPassword({email:$('em').value.trim(),password:$('pw').value});if(error){$('lerr').textContent='بيانات الدخول غير صحيحة';return}init()}
+async function logout(){await sb.auth.signOut();location.reload()}
+async function init(){const {data:{session}}=await sb.auth.getSession();if(!session){$('login').classList.remove('hide');return}
+ const {data:ok}=await sb.rpc('is_staff');if(!ok){$('login').classList.remove('hide');$('lerr').textContent='هذا الحساب ليس له صلاحية';return}
+ $('login').classList.add('hide');$('app').classList.remove('hide');$('out').classList.remove('hide');$('gear').classList.remove('hide');loadAll();setInterval(()=>{if($('sheet').classList.contains('hide'))loadAll()},60000)}
+
+async function loadAll(){
+ const since=new Date(Date.now()-13*864e5);since.setHours(0,0,0,0);
+ const [st,l,s,co,j,k,p,mm,ma,sg,ls,cl]=await Promise.all([sb.rpc('dashboard_stats'),sb.from('leads').select('*').limit(5000),sb.from('settings').select('*').single(),sb.rpc('campaigns_overview'),sb.from('import_jobs').select('*').order('id',{ascending:false}).limit(300),sb.from('knowledge').select('*').order('sort_order'),sb.from('products').select('*').order('id'),sb.from('messages').select('created_at,direction,status,template_name').gte('created_at',since.toISOString()).limit(5000),sb.from('messages').select('id',{count:'exact',head:true}).eq('direction','out'),sb.rpc('segments_overview'),sb.from('lead_segments').select('lead_id,segment_id').limit(10000),sb.from('campaign_leads').select('campaign_id,lead_id,stage,touches').limit(10000)]);
+ S.leads=l.data||[];S.settings=s.data;S.camps=co.data||[];S.jobs=j.data||[];S.kb=k.data||[];S.prods=p.data||[];S.msgs=mm.data||[];S.segs=sg.data||[];S.ls=ls.data||[];S.cl=cl.data||[];
+ S.segOfLead={};S.ls.forEach(x=>(S.segOfLead[x.lead_id]=S.segOfLead[x.lead_id]||[]).push(x.segment_id));
+ S.campOfLead={};S.cl.forEach(x=>(S.campOfLead[x.lead_id]=S.campOfLead[x.lead_id]||[]).push(x));
+ $('s_all').textContent=ma.count||0;renderMsgs(since);
+ const d=st.data||{};$('s_today').textContent=d.sent_today||0;$('s_7d').textContent=d.sent_7d||0;$('s_rep').textContent=d.replies_7d||0;$('s_opt').textContent=d.opted_out||0;
+ const cap=S.settings?.daily_cap||0;$('s_cap').textContent=`الحد اليومي ${cap}`;$('s_bar').style.width=Math.min(100,(d.sent_today||0)/Math.max(cap,1)*100)+'%';
+ $('sendState').innerHTML=S.settings?.paused?'<span class="pill off-pill">الإرسال متوقف</span>':'<span class="pill on-pill">الإرسال يعمل</span>';
+ {const L=S.leads,sent=L.filter(x=>x.touches>0).length,rep=L.filter(x=>x.last_reply_at).length,int=L.filter(x=>['interested','qualified','handed_off'].includes(x.stage)).length,cus=L.filter(x=>x.stage==='customer').length,msgs=S.camps.reduce((a,c)=>a+(c.msgs||0),0);
+  $('funnel').innerHTML=[[L.length,'في قاعدة العملاء'],[sent,'وصلتهم حملة'],[rep,'ردّوا'],[int,'مهتمون'],[cus,'عملاء'],['~'+(msgs*0.0125).toFixed(1)+' ر.ع','تكلفة الرسائل التقريبية']].map(([n,t])=>`<div class="card stat kpi"><b>${n}</b><span>${t}</span></div>`).join('');}
+ $('ctab').innerHTML='<tr><th>الحملة</th><th>الجمهور</th><th>وصلتهم</th><th>ردود</th><th>مهتمون</th><th>رسائل</th></tr>'+S.camps.map(c=>`<tr><td><b>${esc(c.name)}</b> <span class="badge ${c.active?'t-high':'t-none'}">${c.active?'نشطة':'متوقفة'}</span></td><td>${c.enrolled}</td><td>${c.reached}</td><td>${c.replied}</td><td>${c.interested}</td><td>${c.msgs}</td></tr>`).join('');
+ const cities=[...new Set(S.leads.map(x=>x.city).filter(Boolean))].sort();const cur=$('fCity').value;$('fCity').innerHTML='<option value="">كل المدن</option>'+cities.map(x=>`<option>${esc(x)}</option>`).join('');$('fCity').value=cur;
+ {const cur=$('fs').value;$('fs').innerHTML=S.segs.map(x=>`<option value="${esc(x.slug)}">${esc(x.name_ar)}</option>`).join('');$('fs').value=cur||(segOf(SEG).slug||S.segs[0]?.slug||'');if(!$('fq').value)fillKw();}
+ renderSegs();renderLeads();renderHot();renderActs();renderBoard();renderSettings();renderCamps();renderAgents();renderJobs();
+}
+function fillKw(){const s=S.segs.find(x=>x.slug===$('fs').value);$('fq').value=(s?.keywords||[]).join('، ')}
+
+// ---------- audience ----------
+function renderSegs(){const all=S.leads.length;
+ $('segs').innerHTML=`<button class="sc ${SEG===null?'on':''}" style="--c:#101828" onclick="pickSeg(null)"><span>كل العملاء</span><b>${all}</b><span>&nbsp;</span></button>`+S.segs.map(s=>`<button class="sc ${SEG===s.id?'on':''} ${s.leads?'':'empty'}" style="--c:${esc(s.color)}" onclick="pickSeg(${s.id})"><span>${esc(s.name_ar)}</span><b>${s.leads}</b><span>يمكن مراسلتهم ${s.reachable}${s.engaged?` · تفاعل ${s.engaged}`:''}</span></button>`).join('');
+ $('fSeg').innerHTML='<option value="">كل الفئات</option>'+S.segs.map(s=>`<option value="${s.id}">${esc(s.name_ar)} (${s.leads})</option>`).join('');$('fSeg').value=SEG||'';
+ const g=segOf(SEG),used=S.camps.filter(c=>(c.segment_ids||[]).map(Number).includes(SEG));
+ $('segbar').innerHTML=SEG?`<div class="segbar" style="--c:${esc(g.color)}"><div><b>${esc(g.name_ar)}</b> <span class="mute">· ${g.leads} عميل · يمكن مراسلتهم ${g.reachable}</span><div class="kw">كلمات البحث: ${esc((g.keywords||[]).join('، ')||'—')}${used.length?` · مستخدمة في: ${used.map(c=>esc(c.name)).join('، ')}`:''}</div></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" onclick="goFind()">جمع لهذه الفئة</button><button class="btn sec sm" onclick="segSheet(${SEG})">تعديل</button><button class="btn red sm" onclick="delSeg(${SEG})">حذف</button></div></div>`:''}
+let LIM=60;
+function pickSeg(id){SEG=id;LIM=60;renderSegs();renderLeads();if(id){const s=segOf(id);$('fs').value=s.slug;fillKw()}}
+function goFind(){document.querySelector('#audv button[data-v=find]').click();$('fq').scrollIntoView({behavior:'smooth',block:'center'})}
+async function delSeg(id){const g=segOf(id),used=S.camps.filter(c=>(c.segment_ids||[]).map(Number).includes(id));
+ if(used.length)return alert('لا يمكن حذف الفئة لأنها مستخدمة في: '+used.map(c=>c.name).join('، ')+'\nاحذفها من الحملة أولاً.');
+ if(!confirm(`حذف الفئة «${g.name_ar}»؟\nالعملاء (${g.leads}) لن يُحذفوا، فقط يُزالون من هذه الفئة.`))return;
+ const {error}=await sb.from('segments').delete().eq('id',id);if(error)return toast('خطأ: '+error.message);toast('تم حذف الفئة');SEG=null;loadAll()}
+function bulkSeg(){const r=S.lastR||[];if(!r.length)return toast('لا يوجد عملاء في النتائج');
+ sheet(`<h3 style="margin-top:0">إضافة ${r.length} عميل إلى فئة</h3><p class="mute">العملاء الظاهرون حسب البحث والفلاتر الحالية.</p>
+ <div class="chips">${S.segs.map(s=>`<button class="chip" onclick="doBulk(${s.id})">${esc(s.name_ar)}</button>`).join('')}</div>
+ <div style="height:14px"></div><div class="row"><button class="btn sec" onclick="closeSheet()">إلغاء</button></div>`)}
+async function doBulk(sid){const rows=(S.lastR||[]).map(x=>({lead_id:x.id,segment_id:sid}));let err=null;
+ for(let i=0;i<rows.length;i+=500){const {error}=await sb.from('lead_segments').upsert(rows.slice(i,i+500),{onConflict:'lead_id,segment_id',ignoreDuplicates:true});if(error)err=error}
+ closeSheet();toast(err?'خطأ: '+err.message:`تمت إضافة ${rows.length} عميل إلى «${segOf(sid).name_ar}»`);loadAll()}
+function leadCard(x){
+ const wa=x.phone?`<a class="wa" href="${WA(x.phone,x)}">واتساب</a><a href="tel:+${x.phone}">اتصال</a>`:'';
+ const segs=(S.segOfLead[x.id]||[]).map(i=>`<span class="tag">${esc(segOf(i).name_ar||'')}</span>`).join(' ');
+ const cps=(S.campOfLead[x.id]||[]).map(e=>`<span class="tag" style="background:#ecfdf5;color:#065f46" title="${esc(cname(e.campaign_id))}">📣 ${esc(cname(e.campaign_id).split(' - ')[0])} · ${e.touches?e.touches+' رسائل':'لم يُراسل بعد'}</span>`).join(' ');
+ return `<div class="card lead"><div class="top"><b class="nt">${esc(x.business_name)}</b><span class="badge ${x.tier?'t-'+x.tier:''}">${x.tier?TIERS[x.tier]:GROUPS[grp(x.stage)]}</span></div>
+ <div class="mute"><span class="ltr">${fmtPhone(x.phone)}</span> · ${esc(x.city||'')} ${x.rating?`· ⭐ ${x.rating} (${x.reviews})`:''}${x.size?' · '+SIZES[x.size]:''}</div>
+ <div>${segs} ${cps}</div>
+ <div class="mute">المرحلة: ${GROUPS[grp(x.stage)]} · آخر تواصل: ${ago(x.last_contact_at)}${x.opted_out?' · <b style="color:var(--bad)">موقوف عن كل الحملات</b>':''}</div>
+ ${x.contact_name?`<div class="mute">الشخص: ${esc(x.contact_name)} ${x.contact_role?'('+esc(x.contact_role)+')':''}</div>`:''}
+ ${x.request_type?`<div class="mute">الطلب: ${esc(x.request_type)}</div>`:''}
+ ${x.summary?`<div class="nt">${esc(x.summary)}</div>`:''}
+ ${x.next_action&&!x.action_done?`<div class="act">📌 <span class="nt">${esc(x.next_action)}</span></div>`:''}
+ <div class="links">${wa}${x.maps_url?`<a href="${esc(x.maps_url)}" target="_blank">الخريطة</a>`:''}<button onclick="showMsgs(${x.id},this)">المحادثة</button></div>
+ <div class="msgs hide"></div>
+ <div class="row"><select onchange="setStage(${x.id},this.value)"><option value="">تغيير المرحلة…</option>${Object.entries(GROUPS).map(([k,v])=>`<option value="${G2S[k]}">${v}</option>`).join('')}</select>
+ ${x.opted_out?'':`<button class="btn sec" onclick="stopLead(${x.id})">إيقاف الرسائل</button>`}</div></div>`}
+function renderLeads(){const q=$('q').value.trim(),fs=$('fStage').value,ft=$('fTier').value,fc=$('fCity').value,fz=$('fSize').value;
+ const r=S.leads.filter(x=>(SEG===null||(S.segOfLead[x.id]||[]).includes(SEG))&&(!q||(x.business_name||'').includes(q)||(x.phone||'').includes(q.replace(/\D/g,'')||'#'))&&(!fs||grp(x.stage)===fs)&&(!ft||x.tier===ft)&&(!fc||x.city===fc)&&(!fz||x.size===fz));
+ const ORD={interested:0,new:1,contacted:2,called:3,customer:4,closed:5},ts=x=>new Date(x.last_reply_at||x.created_at||0).getTime();
+ r.sort((a,b)=>(ORD[grp(a.stage)]-ORD[grp(b.stage)])||(ts(b)-ts(a)));
+ S.lastR=r;$('lcount').textContent=`${r.length} عميل${SEG?' في «'+segOf(SEG).name_ar+'»':''}`;$('leads').innerHTML=r.slice(0,LIM).map(leadCard).join('')||'<p class="mute">لا يوجد عملاء</p>';
+ $('more').innerHTML=r.length>LIM?`<button class="btn sec" onclick="LIM+=60;renderLeads()">عرض المزيد (${r.length-LIM} متبقي)</button>`:''}
+function segSheet(id){const g=id?segOf(id):{color:'#ea580c',keywords:[]};sheet(`<h3 style="margin-top:0">${id?'تعديل الفئة':'فئة جديدة'}</h3>
+ <label>اسم الفئة</label><input id="ns_name" value="${esc(g.name_ar||'')}" placeholder="مثال: شركات التطوير العقاري">
+ <label>كلمات البحث في خرائط جوجل (افصل بفاصلة)</label><textarea id="ns_kw" rows="3" placeholder="شركة تطوير عقاري، مطور عقاري">${esc((g.keywords||[]).join('، '))}</textarea>
+ <label>اللون</label><input id="ns_color" type="color" value="${esc(g.color||'#ea580c')}" style="height:44px">
+ <div style="height:12px"></div><div class="row"><button class="btn" onclick="saveSeg(${id||0})">حفظ</button><button class="btn sec" onclick="closeSheet()">إلغاء</button></div>`)}
+async function saveSeg(id){const name=$('ns_name').value.trim();if(!name)return toast('اكتب اسم الفئة');
+ const row={name_ar:name,keywords:$('ns_kw').value.split(/[,،\n]+/).map(x=>x.trim()).filter(Boolean),color:$('ns_color').value};
+ const r=id?await sb.from('segments').update(row).eq('id',id).select().single():await sb.from('segments').insert({...row,slug:'seg_'+Date.now().toString(36)}).select().single();
+ if(r.error)return toast('خطأ: '+r.error.message);closeSheet();toast(id?'تم الحفظ':'تمت إضافة الفئة');await loadAll();pickSeg(r.data.id)}
+
+// ---------- interested ----------
+function renderBoard(){
+ const cols=['interested','called','customer','closed'];
+ const inBoard=x=>cols.includes(grp(x.stage))&&(grp(x.stage)!=='closed'||x.last_reply_at||x.manual_stage);
+ const L=S.leads.filter(inBoard);
+ $('board').innerHTML=cols.map(k=>{const r=L.filter(x=>grp(x.stage)===k).sort((a,b)=>new Date(b.updated_at||0)-new Date(a.updated_at||0));
+  return `<div class="col"><h4><span>${GROUPS[k]}</span><span class="mute">${r.length}</span></h4>${r.map(x=>{const ph=x.contact_phone||x.phone;return `<div class="mini"><b class="nt">${esc(x.business_name)}</b>
+  <div class="mute"><span class="ltr">${fmtPhone(ph)}</span>${x.contact_name?' · '+esc(x.contact_name):''}</div>
+  ${x.summary?`<div class="mute nt">${esc(x.summary).slice(0,140)}</div>`:''}
+  <div class="links"><a class="wa" href="${WA(ph,x)}">واتساب</a><a href="tel:+${ph}">اتصال</a></div>
+  <select onchange="setStage(${x.id},this.value)"><option value="">نقل إلى…</option>${cols.filter(c=>c!==k).map(c=>`<option value="${G2S[c]}">${GROUPS[c]}</option>`).join('')}</select></div>`}).join('')}</div>`}).join('')}
+function renderActs(){const r=S.leads.filter(x=>x.next_action&&!x.action_done&&x.stage!=='not_interested'&&!(x.action_at&&new Date(x.action_at)>new Date())).sort((a,b)=>new Date(b.action_at)-new Date(a.action_at));
+ $('actn').textContent=r.length?'('+r.length+')':'';
+ $('acts').innerHTML=r.map(x=>{const ph=x.contact_phone||x.phone;return `<div class="card lead"><div class="top"><b class="nt">${esc(x.business_name)}</b><span class="badge ${x.tier?'t-'+x.tier:''}">${x.tier?TIERS[x.tier]:''}</span></div>
+ <div class="act">📌 <span class="nt">${esc(x.next_action)}</span></div>
+ ${x.contact_name?`<div class="mute">الشخص: ${esc(x.contact_name)} ${x.contact_role?'('+esc(x.contact_role)+')':''}</div>`:''}
+ <div class="mute"><span class="ltr">${fmtPhone(ph)}</span> · ${ago(x.action_at)} · ${esc(cname(x.campaign_id))}</div>
+ <div class="row"><a class="btn green" style="text-align:center;text-decoration:none" href="${WA(ph,x)}">واتساب</a><a class="btn sec" style="text-align:center;text-decoration:none" href="tel:+${ph}">اتصال</a></div>
+ <div class="mute" style="margin-top:6px">نتيجة التواصل:</div>
+ <div class="row out"><button class="btn green" onclick="outcome(${x.id},'interested')">مهتم</button><button class="btn sec" onclick="setStage(${x.id},'handed_off')">تواصلت</button><button class="btn red" onclick="outcome(${x.id},'not_interested')">غير مهتم</button></div>
+ <div class="links"><button onclick="showMsgs(${x.id},this)">المحادثة</button></div><div class="msgs hide"></div></div>`}).join('')||'<p class="mute">لا توجد إجراءات حالياً</p>'}
+async function outcome(id,o){const now=new Date();let u;
+ if(o==='interested')u={stage:'handed_off',tier:'high',action_done:true};else u={stage:'not_interested',tier:'none',action_done:true,next_contact_at:null};
+ u.manual_stage=true;u.updated_at=now.toISOString();const {error}=await sb.from('leads').update(u).eq('id',id);
+ toast(error?'خطأ':o==='interested'?'نُقل إلى تم التواصل':'أُزيل من القائمة');loadAll()}
+function renderHot(){const r=S.leads.filter(x=>!(x.next_action&&!x.action_done)&&!['not_interested','handed_off','customer','invalid'].includes(x.stage)&&!x.manual_stage&&!x.opted_out&&(['qualified','interested'].includes(x.stage)||['high','medium'].includes(x.tier)||x.stage==='replied'));$('hot').innerHTML=r.map(leadCard).join('')||'<p class="mute">لا يوجد</p>'}
+async function showMsgs(id,a){const box=a.closest('.card').querySelector('.msgs');box.classList.toggle('hide');if(box.classList.contains('hide'))return;
+ const L=S.leads.find(x=>x.id===id)||{};
+ const [m1,m2]=await Promise.all([sb.from('messages').select('*').eq('lead_id',id).order('created_at'),L.phone?sb.from('agent_messages').select('*').eq('phone',L.phone).order('at'):Promise.resolve({data:[]})]);
+ const ag=(m2.data||[]).map(m=>({t:m.at,in:m.role==='user',b:m.body}));
+ const tp=(m1.data||[]).filter(m=>m.direction==='out'||!ag.length).map(m=>({t:m.created_at,in:m.direction==='in',b:m.body||('['+({image:'رسالة الحملة بصورة',text:'رسالة الحملة',video:'فيديو'}[m.kind]||'رسالة')+' — '+(m.template_name||'')+']')}));
+ const all=[...tp,...ag].sort((x,y)=>new Date(x.t)-new Date(y.t));
+ box.innerHTML=(L.phone?`<p><a class="btn green" href="${WA(L.phone,L)}">افتح المحادثة في واتساب</a></p>`:'')+(all.map(m=>`<p class="${m.in?'in':'out'}">${m.in?'العميل: ':'الوكيل: '}${esc(m.b)} <span class="mute">${ago(m.t)}</span></p>`).join('')||'<p>لا توجد رسائل</p>')}
+async function setStage(id,v){if(!v)return;const {error}=await sb.from('leads').update({stage:v,manual_stage:true,action_done:true,next_contact_at:null,updated_at:new Date().toISOString()}).eq('id',id);toast(error?'خطأ':'تم الحفظ');loadAll()}
+async function stopLead(id){if(!confirm('إيقاف الرسائل عن هذا العميل من كل الحملات؟'))return;await sb.from('leads').update({opted_out:true,opted_out_at:new Date().toISOString(),next_contact_at:null}).eq('id',id);toast('تم الإيقاف');loadAll()}
+
+// ---------- campaigns ----------
+const KIND={video:'فيديو',image:'صورة',text:'نص'};
+function renderCamps(){
+ $('camps').innerHTML=S.camps.map(c=>{const segs=(c.segment_ids||[]).map(i=>`<span class="tag">${esc(segOf(+i).name_ar||'')}</span>`).join(' ');
+ return `<div class="card"><div class="top"><div><b>${esc(c.name)}</b><div class="mute">${esc(pname(c.product_id))}</div></div><span class="badge ${c.active?'t-high':'t-none'}">${c.active?'نشطة':'متوقفة'}</span></div>
+ <div style="margin-top:8px">${segs||'<span class="mute">بدون جمهور</span>'}${(c.cities||[]).length?` <span class="mute">· ${esc(c.cities.join('، '))}</span>`:''}</div>
+ <div class="fun"><div><b>${c.enrolled}</b><span>الجمهور</span></div><div><b>${c.reached}</b><span>وصلتهم</span></div><div><b>${c.replied}</b><span>ردّوا</span></div><div><b>${c.interested}</b><span>مهتمون</span></div><div><b>${c.customers}</b><span>عملاء</span></div></div>
+ <div class="mute">⏱ ${c.daily_cap?`اليوم ${c.sent_today??0} من ${c.daily_cap}`:`اليوم ${c.sent_today??0} (الحد العام)`} · ${c.send_days?.length?c.send_days.map(i=>DAYS[i]).join('، '):'كل أيام الإرسال'}${c.send_start||c.send_end?' · '+String(c.send_start||'').slice(0,5)+'–'+String(c.send_end||'').slice(0,5):''}</div>
+ <div class="mute">${c.msgs} رسالة مرسلة · بانتظار أول رسالة ${c.waiting} · ${(c.steps||[]).length} رسائل في التسلسل</div>
+ <ol class="mute" style="padding-inline-start:18px">${(c.steps||[]).map(s=>`<li>${KIND[s.kind]||s.kind} — <span class="ltr">${esc(s.template_name)}</span>${s.body_preview?' · '+esc(s.body_preview):''}</li>`).join('')}</ol>
+ <div class="row"><button class="btn sec" onclick="campSheet(${c.id})">تعديل</button><button class="btn ${c.active?'red':'green'}" onclick="toggleCamp(${c.id},${!c.active})">${c.active?'إيقاف':'تفعيل'}</button></div></div>`}).join('')||'<p class="mute">لا توجد حملات</p>'}
+let CW=null; // campaign wizard state
+function campSheet(id){const c=S.camps.find(x=>x.id===id);
+ CW={id:c?.id||null,step:1,name:c?.name||'',product_id:c?.product_id||S.prods[0]?.id,segs:(c?.segment_ids||[]).map(Number),cities:c?.cities||[],max_touches:c?.max_touches||2,cooldown_days:c?.cooldown_days||4,min_gap_days:c?.min_gap_days??14,daily_cap:c?.daily_cap??'',send_days:c?.send_days||[],send_start:(c?.send_start||'').slice(0,5),send_end:(c?.send_end||'').slice(0,5),
+  steps:(c?.steps||[]).map(s=>({...s})),active:c?.active||false};
+ if(!CW.steps.length)CW.steps=[{step_no:1,kind:'text',template_name:'',template_lang:'ar',media_url:'',body_preview:'',min_gap_days:4}];
+ drawCW()}
+function cwKeep(){if(!CW)return;const g=i=>$(i)?.value;
+ if($('cw_name'))CW.name=g('cw_name');if($('cw_ag'))CW.product_id=+g('cw_ag');
+ if($('cw_mt')){CW.max_touches=+g('cw_mt')||2;CW.cooldown_days=+g('cw_cd')||4;CW.min_gap_days=+g('cw_gap')||0}
+ if($('cw_cap')){CW.daily_cap=g('cw_cap');CW.send_start=g('cw_st');CW.send_end=g('cw_en')}
+ document.querySelectorAll('.stp').forEach((el,i)=>{const s=CW.steps[i];if(!s)return;s.kind=el.querySelector('[data-k=kind]').value;s.template_name=el.querySelector('[data-k=tpl]').value.trim();s.template_lang=el.querySelector('[data-k=lang]').value.trim()||'ar';s.media_url=el.querySelector('[data-k=media]').value.trim();s.body_preview=el.querySelector('[data-k=prev]').value.trim();s.min_gap_days=+el.querySelector('[data-k=gap]').value||4})}
+async function drawCW(){const c=CW,st=c.step;
+ const bar=`<div class="steps">${[1,2,3,4].map(i=>`<i class="${i<=st?'on':''}"></i>`).join('')}</div>`;
+ let body='';
+ if(st===1)body=`<h3 style="margin-top:0">١. الوكيل واسم الحملة</h3>
+  <label>اسم الحملة</label><input id="cw_name" value="${esc(c.name)}" placeholder="مثال: السماسرة - مسقط">
+  <label>الوكيل اللي يرد على العملاء</label><select id="cw_ag">${S.prods.map(p=>`<option value="${p.id}" ${p.id===c.product_id?'selected':''}>${esc(p.name_ar)}</option>`).join('')}</select>`;
+ if(st===2){const cities=[...new Set(S.leads.map(x=>x.city).filter(Boolean))].sort();
+  body=`<h3 style="margin-top:0">٢. الجمهور</h3><label>الفئات (اختر واحدة أو أكثر)</label>
+  <div class="chips">${S.segs.map(s=>`<button class="chip ${c.segs.includes(s.id)?'on':''}" onclick="cwTog('segs',${s.id})">${esc(s.name_ar)} <i>${s.reachable}</i></button>`).join('')}</div>
+  <label>المدن (بدون اختيار = كل المدن)</label><div class="chips">${cities.map(x=>`<button class="chip ${c.cities.includes(x)?'on':''}" onclick="cwTog('cities','${esc(x)}')">${esc(x)}</button>`).join('')}</div>`}
+ if(st===3)body=`<h3 style="margin-top:0">٣. الرسائل</h3><p class="mute">كل رسالة قالب معتمد من Meta على رقم المبيعات. اكتب اسم القالب كما هو في Meta.</p>
+  ${c.steps.map((s,i)=>`<div class="stp"><div class="top"><b>الرسالة ${i+1}</b>${c.steps.length>1?`<button class="btn sec sm" onclick="cwKeep();CW.steps.splice(${i},1);drawCW()">حذف</button>`:''}</div>
+   <div class="row"><div><label>اسم القالب</label><input data-k="tpl" dir="ltr" value="${esc(s.template_name)}"></div><div><label>النوع</label><select data-k="kind">${Object.entries(KIND).map(([k,v])=>`<option value="${k}" ${s.kind===k?'selected':''}>${v}</option>`).join('')}</select></div></div>
+   <div class="row"><div><label>اللغة</label><input data-k="lang" dir="ltr" value="${esc(s.template_lang||'ar')}"></div><div><label>الانتظار بعدها (أيام)</label><input data-k="gap" type="number" value="${s.min_gap_days||4}"></div></div>
+   <label>رابط الصورة/الفيديو (إن وجد)</label><input data-k="media" dir="ltr" value="${esc(s.media_url||'')}">
+   <label>وصف مختصر</label><input data-k="prev" value="${esc(s.body_preview||'')}"></div>`).join('')}
+  <div style="height:10px"></div><button class="btn sec" onclick="cwKeep();CW.steps.push({kind:'text',template_name:'',template_lang:'ar',min_gap_days:4});drawCW()">+ رسالة</button>
+  <div class="row"><div><label>أقصى عدد رسائل للعميل</label><input id="cw_mt" type="number" value="${c.max_touches}"></div><div><label>الانتظار بين الرسائل (أيام)</label><input id="cw_cd" type="number" value="${c.cooldown_days}"></div><div><label>أقل مدة بين حملتين لنفس العميل (أيام)</label><input id="cw_gap" type="number" value="${c.min_gap_days}"></div></div>
+  <h3>جدول الإرسال لهذه الحملة</h3><p class="mute">اتركها فارغة لتتبع الإعدادات العامة (زر «الإرسال» بالأعلى: الحد اليومي ${S.settings?.daily_cap||'—'}، من ${(S.settings?.send_start||'').slice(0,5)} إلى ${(S.settings?.send_end||'').slice(0,5)}).</p>
+  <div class="row"><div><label>الحد اليومي لهذه الحملة</label><input id="cw_cap" type="number" min="1" placeholder="بدون حد خاص" value="${c.daily_cap??''}"></div><div><label>من الساعة</label><input id="cw_st" type="time" value="${c.send_start||''}"></div><div><label>إلى الساعة</label><input id="cw_en" type="time" value="${c.send_end||''}"></div></div>
+  <label>أيام الإرسال (بدون اختيار = حسب الإعدادات العامة)</label><div class="chips">${DAYS.map((d,i)=>`<button class="chip ${c.send_days.includes(i)?'on':''}" onclick="cwTog('send_days',${i})">${d}</button>`).join('')}</div>`;
+ if(st===4){body=`<h3 style="margin-top:0">٤. المراجعة</h3><div class="sum" id="cw_sum">جاري الحساب…</div>`}
+ sheet(bar+body+`<div style="height:14px"></div><div class="row">${st>1?'<button class="btn sec" onclick="cwGo(-1)">السابق</button>':'<button class="btn sec" onclick="closeSheet()">إلغاء</button>'}${st<4?'<button class="btn" onclick="cwGo(1)">التالي</button>':`<button class="btn sec" onclick="saveCamp(false)">حفظ كمسودة</button><button class="btn green" onclick="saveCamp(true)">حفظ وتفعيل</button>`}</div>`);
+ if(st===4){const {data:r}=await sb.rpc('campaign_reach',{p_segments:c.segs,p_cities:c.cities});const n=r?.reach||0,steps=c.steps.filter(s=>s.template_name).length;
+  $('cw_sum').innerHTML=`<b>${esc(c.name)}</b> · ${esc(pname(c.product_id))}<br>الجمهور: ${c.segs.map(i=>esc(segOf(i).name_ar)).join('، ')||'—'}${c.cities.length?' · '+esc(c.cities.join('، ')):''}<br>
+  يمكن مراسلتهم: <b>${n}</b>${r?.in_other?` (منهم ${r.in_other} سبق دخولهم حملة أخرى، يبدؤون بعد ${c.min_gap_days} يوم من آخر رسالة)`:''}<br>
+  الجدول: ${c.daily_cap?'حتى '+c.daily_cap+' رسالة يومياً':'الحد اليومي العام'} · ${c.send_days.length?c.send_days.map(i=>DAYS[i]).join('، '):'أيام الإرسال العامة'}${c.send_start||c.send_end?' · '+(c.send_start||'…')+'–'+(c.send_end||'…'):''}<br>
+  الرسائل: ${steps} · التكلفة القصوى التقريبية: <b>${(n*Math.min(steps,c.max_touches)*0.0125).toFixed(1)} ر.ع</b><br>
+  <span class="mute">من طلب الإيقاف أو قال غير مهتم لا تصله أي حملة. الإرسال يلتزم بالحد اليومي وأوقات الإرسال.</span>`}}
+function cwTog(k,v){cwKeep();const a=CW[k];const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1);drawCW()}
+function cwGo(d){cwKeep();if(CW.step===1&&!CW.name.trim())return toast('اكتب اسم الحملة');if(CW.step===2&&d>0&&!CW.segs.length)return toast('اختر فئة واحدة على الأقل');
+ if(CW.step===3&&d>0&&!CW.steps.some(s=>s.template_name))return toast('اكتب اسم قالب واحد على الأقل');CW.step+=d;drawCW()}
+async function saveCamp(activate){const c=CW;const pr=S.prods.find(p=>p.id===c.product_id)||{};
+ const row={name:c.name.trim(),product_id:c.product_id,sector:pr.sector||null,segment_ids:c.segs,cities:c.cities,max_touches:c.max_touches,cooldown_days:c.cooldown_days,min_gap_days:c.min_gap_days,daily_cap:+c.daily_cap||null,send_days:c.send_days.length?c.send_days:null,send_start:c.send_start||null,send_end:c.send_end||null,active:activate||(c.id?c.active:false)};
+ let id=c.id;const r=id?await sb.from('campaigns').update(row).eq('id',id):await sb.from('campaigns').insert(row).select().single();
+ if(r.error)return toast('خطأ: '+r.error.message);if(!id)id=r.data.id;
+ await sb.from('sequence_steps').delete().eq('campaign_id',id);
+ const steps=c.steps.filter(s=>s.template_name).map((s,i)=>({campaign_id:id,step_no:i+1,kind:s.kind,template_name:s.template_name,template_lang:s.template_lang||'ar',media_url:s.media_url||null,body_preview:s.body_preview||null,min_gap_days:s.min_gap_days||4}));
+ if(steps.length){const e=await sb.from('sequence_steps').insert(steps);if(e.error)return toast('خطأ في الرسائل: '+e.error.message)}
+ const {data:n}=await sb.rpc('enroll_campaign',{p_campaign:id});
+ closeSheet();toast(activate?`تم التفعيل · أُضيف ${n||0} للجمهور`:'تم الحفظ');CW=null;loadAll()}
+async function toggleCamp(id,a){if(a&&!confirm('تفعيل الحملة وبدء الإرسال للجمهور؟'))return;await sb.from('campaigns').update({active:a}).eq('id',id);if(a)await sb.rpc('enroll_campaign',{p_campaign:id});toast(a?'تم تفعيل الحملة':'تم إيقاف الحملة');loadAll()}
+
+// ---------- agents ----------
+function renderAgents(){
+ $('agents').innerHTML=S.prods.map(p=>{const kb=S.kb.filter(k=>k.product_id===p.id);const cs=S.camps.filter(c=>c.product_id===p.id);
+ return `<div class="card"><div class="top"><b>${esc(p.name_ar)}</b><span class="badge ${p.active?'t-high':'t-none'}">${p.active?'مفعّل':'موقوف'}</span></div>
+ <p class="nt" style="font-size:14px;margin:8px 0">${esc(p.pitch_ar||'')}</p>
+ ${(p.features_ar||[]).length?`<ul class="mute nt" style="padding-inline-start:18px;margin:6px 0">${p.features_ar.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>`:''}
+ <div class="mute">${kb.length} معلومة · ${cs.length} حملة${p.demo_whatsapp?` · رقم التجربة <span class="ltr">${esc(p.demo_whatsapp)}</span>`:''}</div>
+ <div style="height:10px"></div><div class="row"><button class="btn sec" onclick="agSheet(${p.id})">تعديل الوكيل ومعلوماته</button></div></div>`}).join('')}
+function agSheet(id){const p=S.prods.find(x=>x.id===id)||{active:true};const kb=S.kb.filter(k=>k.product_id===id);
+ sheet(`<h3 style="margin-top:0">${id?'تعديل الوكيل':'وكيل جديد'}</h3>
+ <label>اسم الوكيل</label><input id="ag_name" value="${esc(p.name_ar||'')}" placeholder="مثال: وكيل السمسرة العقارية">
+ <label>الفئة الرئيسية</label><select id="ag_sec">${S.segs.map(s=>`<option value="${esc(s.slug)}" ${s.slug===p.sector?'selected':''}>${esc(s.name_ar)}</option>`).join('')}</select>
+ <label>نبذة يقدّم بها الوكيل الخدمة</label><textarea id="ag_pitch" rows="4">${esc(p.pitch_ar||'')}</textarea>
+ <label>الميزات (كل ميزة في سطر)</label><textarea id="ag_feat" rows="5">${esc((p.features_ar||[]).join('\n'))}</textarea>
+ <div class="row"><div><label>رقم واتساب للتجربة</label><input id="ag_demo" dir="ltr" value="${esc(p.demo_whatsapp||'')}"></div><div><label>رابط فيديو تعريفي</label><input id="ag_vid" dir="ltr" value="${esc(p.demo_video_url||'')}"></div></div>
+ <label style="display:flex;gap:8px;align-items:center;color:var(--ink)"><input type="checkbox" id="ag_on" style="width:auto" ${p.active?'checked':''}> الوكيل مفعّل</label>
+ <div style="height:10px"></div><div class="row"><button class="btn" onclick="saveAg(${id||0})">حفظ</button><button class="btn sec" onclick="closeSheet()">إغلاق</button></div>
+ ${id?`<h3>معلومات الوكيل</h3><p class="mute">يستخدمها الوكيل عند الرد على العملاء.</p>
+ <div id="kbl">${kb.map(x=>`<div class="stp"><div class="top"><b>${esc(x.title)}</b><span class="badge ${x.active?'t-high':'t-none'}">${x.active?'مفعّلة':'موقوفة'}</span></div><p class="nt" style="white-space:pre-wrap;font-size:14px;margin:6px 0">${esc(x.content)}</p><div class="row"><button class="btn sec sm" onclick="editKb(${x.id})">تعديل</button><button class="btn sec sm" onclick="toggleKb(${x.id},${!x.active},${id})">${x.active?'إيقاف':'تفعيل'}</button></div></div>`).join('')||'<p class="mute">لا توجد معلومات بعد</p>'}</div>
+ <div class="stp"><b id="kb_h">معلومة جديدة</b><input type="hidden" id="kid"><label>العنوان</label><input id="kt"><label>المحتوى</label><textarea id="kc" rows="4"></textarea><div style="height:8px"></div><button class="btn" onclick="saveKb(${id})">حفظ المعلومة</button></div>`:''}`)}
+async function saveAg(id){const row={name_ar:$('ag_name').value.trim(),sector:$('ag_sec').value,pitch_ar:$('ag_pitch').value.trim(),features_ar:$('ag_feat').value.split('\n').map(x=>x.trim()).filter(Boolean),demo_whatsapp:$('ag_demo').value.trim()||null,demo_video_url:$('ag_vid').value.trim()||null,active:$('ag_on').checked};
+ if(!row.name_ar)return toast('اكتب اسم الوكيل');
+ const p=S.prods.find(x=>x.id===id);row.sectors=[...new Set([...(p?.sectors||[]),row.sector])];
+ const r=id?await sb.from('products').update(row).eq('id',id).select().single():await sb.from('products').insert({...row,slug:'agent-'+Date.now().toString(36)}).select().single();
+ if(r.error)return toast('خطأ: '+r.error.message);toast('تم الحفظ');await loadAll();agSheet(r.data.id)}
+function editKb(id){const x=S.kb.find(k=>k.id===id);$('kid').value=id;$('kt').value=x.title;$('kc').value=x.content;$('kb_h').textContent='تعديل المعلومة';$('kt').scrollIntoView({behavior:'smooth'})}
+async function saveKb(pid){const row={product_id:pid,title:$('kt').value.trim(),content:$('kc').value.trim(),updated_at:new Date().toISOString()};if(!row.title||!row.content)return toast('اكتب العنوان والمحتوى');
+ const id=+$('kid').value;const {error}=id?await sb.from('knowledge').update(row).eq('id',id):await sb.from('knowledge').insert(row);toast(error?'خطأ':'تم الحفظ');await loadAll();agSheet(pid)}
+async function toggleKb(id,a,pid){await sb.from('knowledge').update({active:a}).eq('id',id);await loadAll();agSheet(pid)}
+
+// ---------- collection ----------
+const JST={pending:['بانتظار الدور','t-low'],running:['جاري الجمع','t-medium'],done:['اكتمل','t-high'],error:['فشل','t-none']};
+const ERR={'gmaps:took too long':'استغرق وقتاً طويلاً','gmaps:queued too long':'لم يبدأ (الأداة كانت معلّقة)','expired':'انتهت صلاحيته قبل أن يبدأ'};
+let JSEL=new Set();
+const segName=slug=>(S.segs.find(s=>s.slug===slug)||{}).name_ar||slug||'';
+function jobVis(){const f=$('jf').value;return S.jobs.filter(x=>!f||(f==='active'?['pending','running'].includes(x.status):f==='empty'?(x.status==='done'&&!x.added):x.status===f))}
+function renderJobs(){const r=jobVis(),all=S.jobs;
+ const n=k=>all.filter(x=>x.status===k).length,added=all.reduce((a,x)=>a+(x.added||0),0);
+ $('jsum').textContent=`${all.length} عملية · مكتملة ${n('done')} · جارية ${n('running')} · بالانتظار ${n('pending')} · فاشلة ${n('error')} · أرقام جديدة ${added}`;
+ const act=all.filter(x=>['pending','running'].includes(x.status));
+ if(document.activeElement?.id!=='jmax')$('jctl').innerHTML=act.length?`<div class="card" style="margin-top:12px"><div class="row"><div><label>أقصى عدد لكل عملية جارية أو بالانتظار (${act.length} عملية · الحالي ${[...new Set(act.map(x=>x.max_results))].join('، ')})</label><input id="jmax" type="number" min="20" max="300" step="20" value="${Math.max(...act.map(x=>x.max_results||0))}"></div><div style="flex:0 0 auto"><button class="btn" onclick="setJobMax()">تحديث العدد</button></div></div></div>`:'';
+ $('jobs').innerHTML=r.map(x=>{const [lab,cls]=JST[x.status]||[x.status,''];return `<label class="job ${JSEL.has(x.id)?'sel':''}"><input type="checkbox" ${JSEL.has(x.id)?'checked':''} onchange="tglJob(${x.id},this.checked)">
+  <div class="jb"><div class="jt"><b>${esc(x.city||'—')}</b><span class="badge ${cls}">${lab}</span></div>
+  <div class="mute">${esc(x.query)} · ${esc(segName(x.sector))}</div>
+  <div class="jn"><span>وُجد <b>${x.found||0}</b></span><span>جديد <b style="color:var(--ok)">${x.added||0}</b></span><span class="mute">${ago(x.created_at)}</span></div>
+  ${x.error?`<div class="mute" style="color:var(--bad)">${esc(ERR[x.error]||x.error)}</div>`:''}</div></label>`}).join('')||'<p class="mute">لا يوجد</p>'}
+async function setJobMax(){const n=Math.min(300,Math.max(20,+$('jmax').value||100));
+ const {error}=await sb.from('import_jobs').update({max_results:n}).in('status',['pending','running']);$('jmax').blur();toast(error?'خطأ: '+error.message:`تم تحديث العدد إلى ${n} بدون إيقاف الجمع`);loadAll()}
+function tglJob(id,on){on?JSEL.add(id):JSEL.delete(id);renderJobs()}
+function selAllJobs(){const r=jobVis().filter(x=>x.status!=='running');const all=r.every(x=>JSEL.has(x.id));r.forEach(x=>all?JSEL.delete(x.id):JSEL.add(x.id));renderJobs()}
+async function dropJobs(ids){ids=ids.filter(id=>(S.jobs.find(x=>x.id===id)||{}).status!=='running');if(!ids.length)return toast('لا يوجد ما يُحذف');
+ if(!confirm(`حذف ${ids.length} من سجل الجمع؟ العملاء الذين جُمعوا لن يُحذفوا.`))return;
+ await sb.from('collection_plan').update({job_id:null}).in('job_id',ids);
+ const {error}=await sb.from('import_jobs').delete().in('id',ids);toast(error?'خطأ: '+error.message:'تم الحذف');JSEL.clear();loadAll()}
+const delJobs=()=>dropJobs([...JSEL]);
+const delJunk=()=>dropJobs(S.jobs.filter(x=>x.status==='error'||(x.status==='done'&&!x.added)).map(x=>x.id));
+async function startImport(){const btn=document.querySelector('[onclick="startImport()"]');if(btn.disabled)return;btn.disabled=true;setTimeout(()=>btn.disabled=false,4000);
+ if(!$('fq').value.trim())return toast('اكتب كلمات البحث');const {data:{session}}=await sb.auth.getSession();
+ const slug=$('fs').value;
+ const r=await fetch('https://upxqeontwoghuqfowmwf.supabase.co/functions/v1/leads',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+session.access_token},body:JSON.stringify({action:'import',query:$('fq').value,city:$('fc').value,sector:slug,campaign_id:null,max_results:Math.min(300,+$('fmax').value||100)})});
+ const b=await r.json();if(b.ok)setTimeout(liveTick,3000);toast(b.ok?(b.job_ids?`بدأ الجمع في ${b.job_ids.length} محافظة بالتتابع`:'بدأ الجمع'):b.busy?'يوجد بحث جارٍ الآن، انتظر حتى ينتهي':'خطأ: '+(b.error||''));loadAll()}
+let liveT;
+async function liveTick(){clearTimeout(liveT);if($('t-aud').classList.contains('hide')||$('v-find').classList.contains('hide')){liveT=setTimeout(liveTick,10000);return}
+ try{const {data:{session}}=await sb.auth.getSession();const r=await fetch('https://upxqeontwoghuqfowmwf.supabase.co/functions/v1/leads',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+session.access_token},body:JSON.stringify({action:'progress'})});const b=await r.json();
+  const R=b.running;if(!R&&!b.queued){$('live').classList.add('hide');liveT=setTimeout(liveTick,30000);return}
+  $('live').classList.remove('hide');
+  if(!R){$('live').innerHTML=`<b>بانتظار البدء</b><div class="mute">في الطابور: ${b.queued}</div>`;liveT=setTimeout(liveTick,10000);return}
+  const el=R.started?Math.round((Date.now()-R.started)/1000):0,pct=R.started?Math.min(99,Math.round(el/R.max_secs*100)):2;
+  $('live').innerHTML=`<div class="top"><b>جاري الجمع: ${esc(R.city||'')}</b><span class="mute">${R.started?Math.floor(el/60)+' د':'يبدأ…'}</span></div>
+  <div class="mute">${esc(R.query)} · ${R.lines} بحث${b.queued?` · في الطابور ${b.queued}`:''}</div>
+  <div class="bar" style="margin:8px 0"><i style="width:${pct}%"></i></div>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr)"><div class="stat"><b>${R.found}</b><span>نشاط</span></div><div class="stat"><b>${R.with_phone}</b><span>برقم</span></div><div class="stat"><b>${R.mobile}</b><span>موبايل</span></div></div>
+  ${(R.latest||[]).map(x=>`<div class="mute" style="display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:4px;margin-top:4px"><span>${esc(x.name)}</span><span class="ltr" style="color:${x.mobile?'var(--ok)':'var(--mute)'}">${esc(x.phone||'—')}</span></div>`).join('')}`;
+ }catch(e){}
+ liveT=setTimeout(liveTick,10000)}
+
+// ---------- messages / settings ----------
+const TPL={nyxom_clinic_intro_video:'العيادات: التعريف',nyxom_clinic_last_offer:'العيادات: العرض الأخير',nyxom_realestate_intro:'العقارات: التعريف',nyxom_realestate_followup:'العقارات: المتابعة'};
+function renderMsgs(since){const days=[],m=S.msgs;for(let i=0;i<14;i++){const d=new Date(since);d.setDate(d.getDate()+i);days.push(d.toLocaleDateString('en-CA',{timeZone:'Asia/Muscat'}))}
+ const key=x=>new Date(x.created_at).toLocaleDateString('en-CA',{timeZone:'Asia/Muscat'});
+ const o={},inn={};m.forEach(x=>{const k=key(x);if(x.direction==='out')o[k]=(o[k]||0)+1;else inn[k]=(inn[k]||0)+1});
+ const mx=Math.max(1,...days.map(d=>o[d]||0));
+ $('chart').innerHTML=days.map(d=>`<div class="cb" title="${d}: مرسلة ${o[d]||0} · ردود ${inn[d]||0}"><div class="cv"><i style="height:${(o[d]||0)/mx*100}%"></i><i class="r" style="height:${(inn[d]||0)/mx*100}%"></i></div><small>${o[d]||0}</small><span>${d.slice(8)}/${d.slice(5,7)}</span></div>`).join('');
+ const t={};m.filter(x=>x.direction==='out').forEach(x=>{const k=x.template_name||'نص';t[k]=(t[k]||0)+1});
+ $('bytpl').innerHTML=Object.entries(t).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div style="display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:6px 0"><span>${esc(TPL[k]||k)}</span><b>${v}</b></div>`).join('')||'<p class="mute">لا يوجد</p>'}
+function renderSettings(){const s=S.settings;if(!s)return;
+ $('pauseBox').innerHTML=s.paused?`<span class="pill off-pill">الإرسال متوقف</span> <button class="btn green sm" onclick="togglePause(false)">تشغيل الإرسال</button>`:`<span class="pill on-pill">الإرسال يعمل</span> <button class="btn red sm" onclick="togglePause(true)">إيقاف الإرسال</button>`;
+ if(document.activeElement.tagName!=='INPUT'){$('cap').value=s.daily_cap;$('st').value=s.send_start.slice(0,5);$('en').value=s.send_end.slice(0,5);$('ow').value=s.owner_whatsapp||''}
+ $('days').innerHTML=DAYS.map((d,i)=>`<label style="margin:0;color:var(--ink)"><input type="checkbox" style="width:auto" value="${i}" ${s.send_days.includes(i)?'checked':''}> ${d}</label>`).join('')}
+async function togglePause(p){if(!p&&!confirm('تشغيل الإرسال الآلي للعملاء؟'))return;await sb.from('settings').update({paused:p,updated_at:new Date().toISOString()}).eq('id',1);toast(p?'تم إيقاف الإرسال':'تم تشغيل الإرسال');loadAll()}
+async function saveSettings(){const days=[...document.querySelectorAll('#days input:checked')].map(x=>+x.value);
+ const {error}=await sb.from('settings').update({daily_cap:Math.max(1,Math.min(250,+$('cap').value||20)),send_start:$('st').value,send_end:$('en').value,send_days:days,owner_whatsapp:$('ow').value.replace(/\D/g,''),updated_at:new Date().toISOString()}).eq('id',1);toast(error?'خطأ في الحفظ':'تم حفظ الإعدادات');loadAll()}
+init();
+</script></body></html>
