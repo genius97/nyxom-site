@@ -1,6 +1,6 @@
 ---
 name: nyxom-code-standards
-description: Use whenever writing, changing, refactoring or reviewing code in any Nyxom repository (TypeScript/JavaScript, Python, n8n code nodes, scripts). Enforces clean, readable, maintainable code, unit tests, mutation testing, and a self-review before any commit or PR.
+description: Use whenever writing, changing, refactoring or reviewing code in any Nyxom repository (TypeScript/JavaScript, Python, Kotlin/Android, n8n code nodes, scripts). Enforces clean, readable, maintainable code, unit tests, mutation testing, and a self-review before any commit or PR.
 ---
 
 # Nyxom Code Standards
@@ -39,14 +39,14 @@ Apply these rules to every code change. Goal: code a senior engineer at a top co
 - **Mutation score ≥ 70%** on changed modules (≥ 85% for critical logic). Surviving mutants = missing assertions → add tests.
 
 ## Tooling defaults (use repo's own if present)
-| | TS/JS | Python |
-|---|---|---|
-| Format | Prettier | ruff format (or black) |
-| Lint | ESLint (typescript-eslint strict) | ruff |
-| Types | tsc --noEmit | mypy / pyright |
-| Unit tests | Vitest (or Jest) | pytest |
-| Coverage | vitest --coverage (v8) | pytest-cov |
-| Mutation | StrykerJS | mutmut (or cosmic-ray) |
+| | TS/JS | Python | Kotlin/Android |
+|---|---|---|---|
+| Format | Prettier | ruff format (or black) | ktlint |
+| Lint | ESLint (typescript-eslint strict) | ruff | detekt + Android Lint |
+| Types | tsc --noEmit | mypy / pyright | Kotlin compiler (warnings as errors) |
+| Unit tests | Vitest (or Jest) | pytest | JUnit5 + MockK |
+| Coverage | vitest --coverage (v8) | pytest-cov | Kover / JaCoCo |
+| Mutation | StrykerJS | mutmut (or cosmic-ray) | Pitest (pitest-kotlin) |
 
 If a tool is missing, add it with a minimal config and an npm/make script (`test`, `test:coverage`, `test:mutation`, `lint`, `typecheck`). Commands and configs: `references/testing.md`.
 
